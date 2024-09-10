@@ -377,15 +377,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f69954cc1414197aa8d69f88b72e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timerMultiplayer: 2.5
-  _smoothMotion: 0.5
-  _fishPositionInterpolation: 0
-  _fishDestination: 0
-  _fishDestinationChangeTimer: 0
-  _fishVelocity: 0
   _topPivot: {fileID: 1518868715}
   _bottomPivot: {fileID: 1760457292}
   _fishIndicator: {fileID: 92794135}
+  _hook: {fileID: 619439384}
+  _hookLength: 0.1
+  _hookPower: 5
+  _hookPosition: 0
+  _hookProgress: 0
+  _hookPullYVelocity: 0
+  _hookPullPower: 0.01
+  _hookGravity: 0.005
+  _hookProgressDegradationPower: 0.01
+  _fishTimerMultiplayer: 2
+  _fishSmoothMotion: 0.5
+  _fishVelocity: 0
+  _fishNewDestTimer: 0
+  _fishDestination: 0
+  _fishPosition: 0
 --- !u!1 &525473507
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +509,7 @@ GameObject:
   - component: {fileID: 619439386}
   - component: {fileID: 619439385}
   m_Layer: 5
-  m_Name: Hook Fish Area
+  m_Name: Hook Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

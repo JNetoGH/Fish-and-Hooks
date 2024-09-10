@@ -6,16 +6,18 @@ public class FishingBars : MonoBehaviour
 {
     
     [TitleGroup("Gameplay Parameters")]
-    [SerializeField] private float _timerMultiplayer = 3f;
-    [SerializeField] private float _smoothMotion = 1f;
-    
-    // Value from 1 to 0 used to lerp from between the top and bottom pivots.
-    [ReadOnly, SerializeField] private float _fishPositionInterpolation;
-    [ReadOnly, SerializeField] private float _fishDestination;
+    [SerializeField] private float _timerMultiplayer = 2.5f;
+    [SerializeField] private float _smoothMotion = 0.5f;
     
     // Sets when the destination position will change,
     // to simulate the fish moving under water.
+    [TitleGroup("Destinations")]
     [ReadOnly, SerializeField] private float _fishDestinationChangeTimer;
+    [ReadOnly, SerializeField] private float _fishDestination;
+    
+    // Value from 1 to 0 used to lerp from between the top and bottom pivots.
+    [TitleGroup("Pivots Interpolation")]
+    [ReadOnly, SerializeField] private float _fishPositionInterpolation;
     [ReadOnly, SerializeField] private float _fishVelocity;
     
     [TitleGroup("References")]

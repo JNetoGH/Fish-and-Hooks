@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f69954cc1414197aa8d69f88b72e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timerMultiplayer: 3
+  _timerMultiplayer: 2.5
   _smoothMotion: 0.5
   _fishPositionInterpolation: 0
   _fishDestination: 0

@@ -1,13 +1,27 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class FishingBars : MonoBehaviour
 {
     
-    /// <summary> True when the fish is above the lower limit and under the upper limit.</summary>
-    [Title("Public Properties"), PropertyOrder(-1)]    
-    [ReadOnly, ShowInInspector] public bool IsFishInHooksRange { get; private set; }
+    /// <summary>
+    /// Returns true when the fish is above the lower limit and under the upper limit.
+    /// </summary>
+    public bool IsFishInHooksRange { get; private set; }
+    
+    /// <summary>
+    /// Use this property to block user inputs and the escape bar update.
+    /// </summary>
+    public bool CanRun { get; set; }
+    
+    /// <summary>
+    /// Returns true when the escape bar's fill Y local scale reaches 1.
+    /// </summary>
+    public bool HasFishEscaped { get; private set; }
     
     
     [Title("References")]
@@ -18,12 +32,12 @@ public class FishingBars : MonoBehaviour
     [SerializeField] private Transform _hookUpperLimit;
     [SerializeField] private Transform _hookLowerLimit;
     [SerializeField] private Image _hookImage;
-    [SerializeField] private Transform _scapeBarFill;              
+    [SerializeField] private Transform _escapeBarFill;              
     
     
-    [Title("Scape Bar Gameplay")]  
-    // How per second the scape bar fills up, this bar uses it y scale to fill, 0 is empty and 1 is full.
-    [SerializeField] private float _scapeBarIncrement = 0.1f;
+    [Title("Escape Bar Gameplay")]  
+    // How per second the escape bar fills up, this bar uses it y scale to fill, 0 is empty and 1 is full.
+    [SerializeField] private float _escapeBarIncrement = 0.3f;
     
     
     [Title("Hook Gameplay")]
@@ -31,8 +45,8 @@ public class FishingBars : MonoBehaviour
     [SerializeField] private float _hookUpForce = 0.01f;
     // The force added to the hook downwards each frame.
     [SerializeField] private float _hookGravity = 0.005f;
-    // How much per second the hook decrements from the scape bar
-    [SerializeField] private float _hookScapeDecrement = 0.15f;  
+    // How much per second the hook decrements from the escape bar
+    [SerializeField] private float _hookEscapeDecrement = 0.1f;  
     
     
     [Title("Hook Debugging")]
@@ -58,17 +72,35 @@ public class FishingBars : MonoBehaviour
     [ReadOnly, SerializeField, Range(0,1)] private float _fishDestination;
     // A value from 1 to 0 used to interpolate in a lerp the fish between the top and bottom pivots.
     [ReadOnly, SerializeField, Range(0,1)] private float _fishPosition;
-    
-    
+
+    private void Awake()
+    {
+        CanRun = false;
+    }
+
+    private void Start()
+    {
+        // Removing the guide images on the hook children while the game is running.s
+        _hookUpperLimit.GetComponent<Image>().enabled = false;
+        _hookLowerLimit.GetComponent<Image>().enabled = false;
+        _topPivot.GetComponent<Image>().enabled = false;
+        _bottomPivot.GetComponent<Image>().enabled = false;
+    }
+
     void Update()
     {
+        if (!CanRun)
+            return;
+        
         UpdateFishTimer();
         UpdateFishPosition();
         UpdateHook();
         IsFishInHooksRange = (_fishIndicator.position.y >= _hookLowerLimit.position.y &&
                          _fishIndicator.position.y <= _hookUpperLimit.position.y);
         _hookImage.color = IsFishInHooksRange ? Color.green : Color.yellow;
-        UpdateScapeBar();
+        UpdateEscapeBar();
+        if (_escapeBarFill.localScale.y >= 1)
+            HasFishEscaped = true;
     }
     
     private void UpdateFishTimer()
@@ -130,18 +162,34 @@ public class FishingBars : MonoBehaviour
         _hook.position = Vector3.Lerp(_bottomPivot.position, _topPivot.position, _hookPosition);
     }
     
-    private void UpdateScapeBar()
+    private void UpdateEscapeBar()
     {
-        // Updates the scape bar's fill by using the decrement from the hook, and increment from the scape bar.
+        // Updates the escape bar's fill by using the decrement from the hook, and increment from the escape bar.
         // This bar uses it y scale to fill, 0 is empty and 1 is full (whole hight).
         // Therefore a Clamp is required to keep it in grange
-        Vector3 currentFillScale = _scapeBarFill.localScale;
+        Vector3 currentFillScale = _escapeBarFill.localScale;
         if (IsFishInHooksRange) 
-            currentFillScale.y -= _hookScapeDecrement * Time.deltaTime;
+            currentFillScale.y -= _hookEscapeDecrement * Time.deltaTime;
         else 
-            currentFillScale.y += _scapeBarIncrement * Time.deltaTime;
+            currentFillScale.y += _escapeBarIncrement * Time.deltaTime;
         currentFillScale.y = Mathf.Clamp01(currentFillScale.y);
-        _scapeBarFill.localScale = currentFillScale;
+        _escapeBarFill.localScale = currentFillScale;
+    }
+    
+    /// <summary>
+    /// Resets the Fish and Hook internal positions back to 0, and the escape bar's scale.
+    /// </summary>
+    [Button]
+    public void ResetTheBars()
+    {
+        _fishPosition = 0;
+        _hookPosition = 0;
+        
+        Vector3 newScale = _escapeBarFill.localScale;
+        newScale.y = 0;
+        _escapeBarFill.localScale = newScale;
+        
+        HasFishEscaped = false;
     }
     
 }

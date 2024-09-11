@@ -5,6 +5,11 @@ using UnityEngine.UI;
 public class FishingBars : MonoBehaviour
 {
     
+    /// <summary> True when the fish is above the lower limit and under the upper limit.</summary>
+    [Title("Public Properties"), PropertyOrder(-1)]    
+    [ReadOnly, ShowInInspector] public bool IsFishInHooksRange { get; private set; }
+    
+    
     [Title("References")]
     [SerializeField] private Transform _topPivot;
     [SerializeField] private Transform _bottomPivot;
@@ -13,18 +18,21 @@ public class FishingBars : MonoBehaviour
     [SerializeField] private Transform _hookUpperLimit;
     [SerializeField] private Transform _hookLowerLimit;
     [SerializeField] private Image _hookImage;
+    [SerializeField] private Transform _scapeBarFill;              
     
     
-    [SerializeField] private float _hookPower = 5f;  
-    [ReadOnly, SerializeField] private float _hookProgress;
-    [SerializeField] private float _hookProgressDegradationPower = 0.01f;
-   
+    [Title("Scape Bar Gameplay")]  
+    // How per second the scape bar fills up, this bar uses it y scale to fill, 0 is empty and 1 is full.
+    [SerializeField] private float _scapeBarIncrement = 0.1f;
+    
     
     [Title("Hook Gameplay")]
     // The force added to the hook upwards.
     [SerializeField] private float _hookUpForce = 0.01f;
     // The force added to the hook downwards each frame.
     [SerializeField] private float _hookGravity = 0.005f;
+    // How much per second the hook decrements from the scape bar
+    [SerializeField] private float _hookScapeDecrement = 0.15f;  
     
     
     [Title("Hook Debugging")]
@@ -57,17 +65,10 @@ public class FishingBars : MonoBehaviour
         UpdateFishTimer();
         UpdateFishPosition();
         UpdateHook();
-        
-        if (_fishIndicator.position.y >= _hookLowerLimit.position.y &&
-            _fishIndicator.position.y <= _hookUpperLimit.position.y)
-        {
-            Debug.Log("The fish is in hook's Range!!!!");
-            _hookImage.color = Color.green;
-        }
-        else
-        {
-            _hookImage.color = Color.yellow;
-        }
+        IsFishInHooksRange = (_fishIndicator.position.y >= _hookLowerLimit.position.y &&
+                         _fishIndicator.position.y <= _hookUpperLimit.position.y);
+        _hookImage.color = IsFishInHooksRange ? Color.green : Color.yellow;
+        UpdateScapeBar();
     }
     
     private void UpdateFishTimer()
@@ -127,6 +128,20 @@ public class FishingBars : MonoBehaviour
         _hookPosition += _hookYVelocity;
         _hookPosition = Mathf.Clamp01(_hookPosition);
         _hook.position = Vector3.Lerp(_bottomPivot.position, _topPivot.position, _hookPosition);
+    }
+    
+    private void UpdateScapeBar()
+    {
+        // Updates the scape bar's fill by using the decrement from the hook, and increment from the scape bar.
+        // This bar uses it y scale to fill, 0 is empty and 1 is full (whole hight).
+        // Therefore a Clamp is required to keep it in grange
+        Vector3 currentFillScale = _scapeBarFill.localScale;
+        if (IsFishInHooksRange) 
+            currentFillScale.y -= _hookScapeDecrement * Time.deltaTime;
+        else 
+            currentFillScale.y += _scapeBarIncrement * Time.deltaTime;
+        currentFillScale.y = Mathf.Clamp01(currentFillScale.y);
+        _scapeBarFill.localScale = currentFillScale;
     }
     
 }

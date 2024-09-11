@@ -27,6 +27,46 @@ public class GameManager : MonoBehaviour
     [ReadOnly, SerializeField] private float _countdown = 0;
     [ReadOnly, SerializeField] private bool _isRunning = false;
     
+    [Button]                                                    
+    public void RunNewGameEasy()                                 
+    {                                                           
+        _fishingBars._fishTimerMultiplier = 1.5f;               
+        _fishingBars._escapeBarIncrement = 0.2f;                
+        _fishingBars._fishSmoothMotion = 0.7f;  
+        _fishingBars._hookEscapeDecrement = 0.15f;     
+        RunNewGame();                                           
+    }                                                           
+    
+    [Button]                               
+    public void RunNewGameMid()
+    {
+        _fishingBars._fishTimerMultiplier = 1.3f;
+        _fishingBars._escapeBarIncrement = 0.25f; 
+        _fishingBars._fishSmoothMotion = 0.6f; 
+        _fishingBars._hookEscapeDecrement = 0.125f;    
+        RunNewGame();
+    }                                      
+    
+    [Button]                                              
+    public void RunNewGameHard()                           
+    {                                                     
+        _fishingBars._fishTimerMultiplier = 1f;
+        _fishingBars._escapeBarIncrement = 0.3f;
+        _fishingBars._fishSmoothMotion = 0.5f;
+        _fishingBars._hookEscapeDecrement = 0.1f;
+        RunNewGame();                                     
+    }                                                     
+                                                                       
+    [Button]                                                       
+    public void RunNewGameInferno()                                   
+    {                                                              
+        _fishingBars._fishTimerMultiplier = 0.8f;                    
+        _fishingBars._escapeBarIncrement = 0.4f;                   
+        _fishingBars._fishSmoothMotion = 0.3f;                     
+        _fishingBars._hookEscapeDecrement = 0.07f;                  
+        RunNewGame();                                              
+    }                                                              
+    
     [Button]
     public void RunNewGame()
     {

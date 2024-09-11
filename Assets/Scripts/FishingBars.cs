@@ -37,7 +37,7 @@ public class FishingBars : MonoBehaviour
     
     [Title("Escape Bar Gameplay")]  
     // How per second the escape bar fills up, this bar uses it y scale to fill, 0 is empty and 1 is full.
-    [SerializeField] private float _escapeBarIncrement = 0.3f;
+    [SerializeField] public float _escapeBarIncrement = 0.3f;
     
     
     [Title("Hook Gameplay")]
@@ -45,8 +45,12 @@ public class FishingBars : MonoBehaviour
     [SerializeField] private float _hookUpForce = 0.01f;
     // The force added to the hook downwards each frame.
     [SerializeField] private float _hookGravity = 0.005f;
+    // How fast the hook can ascend.
+    [SerializeField] private float _hookMaxYVelocity = 0.02f;
+    // How fast the hook can descend.
+    [SerializeField] private float _hookMinYVelocity = -0.04f;
     // How much per second the hook decrements from the escape bar
-    [SerializeField] private float _hookEscapeDecrement = 0.1f;  
+    [SerializeField] public float _hookEscapeDecrement = 0.1f;  
     
     
     [Title("Hook Debugging")]
@@ -58,9 +62,9 @@ public class FishingBars : MonoBehaviour
     
     [Title("Fish Gameplay")]
     // Multiplies a rand number from 0 to 1, the bigger, the longer it takes to get a new destination.
-    [SerializeField] private float _fishTimerMultiplier = 1f; 
+    [SerializeField] public float _fishTimerMultiplier = 1f; 
     // The value used in the fish's SmoothDump motion, the closer to 0, the quicker.
-    [SerializeField] private float _fishSmoothMotion = 0.5f;
+    [SerializeField] public float _fishSmoothMotion = 0.5f;
     
     
     [Title("Fish Debugging")]
@@ -94,7 +98,6 @@ public class FishingBars : MonoBehaviour
         
         UpdateFishTimer();
         UpdateFishPosition();
-        UpdateHook();
         IsFishInHooksRange = (_fishIndicator.position.y >= _hookLowerLimit.position.y &&
                          _fishIndicator.position.y <= _hookUpperLimit.position.y);
         _hookImage.color = IsFishInHooksRange ? Color.green : Color.yellow;
@@ -102,7 +105,15 @@ public class FishingBars : MonoBehaviour
         if (_escapeBarFill.localScale.y >= 1)
             HasFishEscaped = true;
     }
-    
+
+    private void FixedUpdate()
+    {
+        if (!CanRun)
+            return;
+        
+        UpdateHook();
+    }
+
     private void UpdateFishTimer()
     {
         _fishNewDestTimer -= Time.deltaTime;
@@ -132,14 +143,14 @@ public class FishingBars : MonoBehaviour
         // FORCES ON THE HOOK
         // Applies upwards force to the hook if the required input is received.
         // Then, Applies Gravity to the hook velocity.
-        if (Input.GetMouseButton(0))
+        if (Input.touchCount > 0)
         {     
             // The negative velocity used for fall can accumulate and take too long to be beaten.
             // So, if there is any accumulated negative velocity, it must be eliminated once an input is detected.
             if (_hookYVelocity < 0)
                 _hookYVelocity = 0;
             
-            _hookYVelocity += _hookUpForce * Time.deltaTime;
+            _hookYVelocity += _hookUpForce;
             
             // Removes accumulated velocity when the hook area has reached the top pivot, otherwise it gets stuck.
             if (Mathf.Approximately(_hookPosition, 1))
@@ -152,7 +163,8 @@ public class FishingBars : MonoBehaviour
             // Removes accumulated velocity when the hook area has reached the bottom pivot, otherwise it gets stuck.
             _hookYVelocity = 0;
         }
-        _hookYVelocity -= _hookGravity * Time.deltaTime;
+        _hookYVelocity -= _hookGravity;
+        _hookYVelocity = Mathf.Clamp(_hookYVelocity, _hookMinYVelocity, _hookMaxYVelocity);
         
         // Applies the hook's Y velocity to its internal position (0 to 1 value)
         // Makes sure to keep it in range by clamping it.
@@ -165,7 +177,7 @@ public class FishingBars : MonoBehaviour
     private void UpdateEscapeBar()
     {
         // Updates the escape bar's fill by using the decrement from the hook, and increment from the escape bar.
-        // This bar uses it y scale to fill, 0 is empty and 1 is full (whole hight).
+        // This bar uses it y scale to fill, 0 is empty and 1 is full (whole height).
         // Therefore a Clamp is required to keep it in grange
         Vector3 currentFillScale = _escapeBarFill.localScale;
         if (IsFishInHooksRange) 

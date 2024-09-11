@@ -349,8 +349,10 @@ MonoBehaviour:
   _hookImage: {fileID: 619439385}
   _escapeBarFill: {fileID: 1168337844}
   _escapeBarIncrement: 0.3
-  _hookUpForce: 0.01
-  _hookGravity: 0.005
+  _hookUpForce: 0.005
+  _hookGravity: 0.0025
+  _hookMaxYVelocity: 0.02
+  _hookMinYVelocity: -0.04
   _hookEscapeDecrement: 0.1
   _hookYVelocity: 0
   _hookPosition: 0

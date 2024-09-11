@@ -1,9 +1,8 @@
-using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+
 
 public class FishingBars : MonoBehaviour
 {

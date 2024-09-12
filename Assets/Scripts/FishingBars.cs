@@ -22,6 +22,7 @@ public class FishingBars : MonoBehaviour
     /// </summary>
     public bool HasFishEscaped { get; private set; }
     
+    private int lastEncoderValue = 0;
     
     [Title("References")]
     [SerializeField] private Transform _topPivot;
@@ -137,12 +138,29 @@ public class FishingBars : MonoBehaviour
         _fishIndicator.position = Vector3.Lerp(_bottomPivot.position, _topPivot.position, _fishPosition);
     }
     
-    private void UpdateHook()                                              
+    private void UpdateHook()
     {
-        // FORCES ON THE HOOK
+        JNetoArduinoHttpClient jNetoArduinoHttpClient = FindObjectOfType<JNetoArduinoHttpClient>();
+        // FORCES ON THE HOOK SPECIAL CONTROLLER
+        if (jNetoArduinoHttpClient.IsConnected)
+        {
+            if (lastEncoderValue != jNetoArduinoHttpClient.EncoderValue)
+            {
+                Debug.Log("FORCE");
+                _hookYVelocity += _hookUpForce * 10;
+                
+                // Removes accumulated velocity when the hook area has reached the top pivot, otherwise it gets stuck.
+                if (Mathf.Approximately(_hookPosition, 1))
+                    _hookYVelocity = 0;
+                
+            }
+            lastEncoderValue = jNetoArduinoHttpClient.EncoderValue;
+        }
+        
+        // FORCES ON THE HOOK TOUCH SCREEN
         // Applies upwards force to the hook if the required input is received.
         // Then, Applies Gravity to the hook velocity.
-        if (Input.touchCount > 0)
+        else if (Input.touchCount > 0)
         {     
             // The negative velocity used for fall can accumulate and take too long to be beaten.
             // So, if there is any accumulated negative velocity, it must be eliminated once an input is detected.
@@ -157,11 +175,14 @@ public class FishingBars : MonoBehaviour
             
             Debug.Log("Hook Input");
         }
+
+        // IN CASE OF NO INPUTS
+        // Removes accumulated velocity when the hook area has reached the bottom pivot, otherwise it gets stuck.
         else if (Mathf.Approximately(_hookPosition, 0))
         {
-            // Removes accumulated velocity when the hook area has reached the bottom pivot, otherwise it gets stuck.
             _hookYVelocity = 0;
         }
+        
         _hookYVelocity -= _hookGravity;
         _hookYVelocity = Mathf.Clamp(_hookYVelocity, _hookMinYVelocity, _hookMaxYVelocity);
         

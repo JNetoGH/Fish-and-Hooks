@@ -2665,9 +2665,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7801e1c2a1ca9dd4db497c5e40c8fb5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _url: http://192.168.4.1/counter
-  _updateInterval: 0.1
-  _encoderValue: 0
+  <IsConnected>k__BackingField: 0
+  <EncoderValue>k__BackingField: 0
+  _url: http://192.168.4.1/value
+  _updateInterval: 0
 --- !u!4 &1454395925
 Transform:
   m_ObjectHideFlags: 0

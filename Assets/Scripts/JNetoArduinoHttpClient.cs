@@ -83,5 +83,9 @@ public class JNetoArduinoHttpClient : MonoBehaviour
     {
         IsConnected = false;
     }
-    
+
+    private void OnApplicationPause(bool pause)
+    {
+        IsConnected = pause;
+    }
 }

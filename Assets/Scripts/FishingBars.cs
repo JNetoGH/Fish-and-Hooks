@@ -1,3 +1,4 @@
+using Interfaces;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,67 +8,63 @@ using Random = UnityEngine.Random;
 public class FishingBars : MonoBehaviour
 {
     
+    /// <summary>                                                            
+    /// Use this property to block user inputs and the escape bar update.    
+    /// </summary>
+    [field: SerializeField, ReadOnly]                                        
+    public bool CanRun { get; set; }                                          
+    
     /// <summary>
     /// Returns true when the fish is above the lower limit and under the upper limit.
     /// </summary>
+    [field: SerializeField, ReadOnly]  
     public bool IsFishInHooksRange { get; private set; }
-    
-    /// <summary>
-    /// Use this property to block user inputs and the escape bar update.
-    /// </summary>
-    public bool CanRun { get; set; }
     
     /// <summary>
     /// Returns true when the escape bar's fill Y local scale reaches 1.
     /// </summary>
+    [field: SerializeField, ReadOnly]  
     public bool HasFishEscaped { get; private set; }
-    
-    private int lastEncoderValue = 0;
-    
-    [Title("References")]
-    [SerializeField] private Transform _topPivot;
-    [SerializeField] private Transform _bottomPivot;
-    [SerializeField] private Transform _fishIndicator;
-    [SerializeField] private Transform _hook;
-    [SerializeField] private Transform _hookUpperLimit;
-    [SerializeField] private Transform _hookLowerLimit;
-    [SerializeField] private Image _hookImage;
-    [SerializeField] private Transform _escapeBarFill;              
-    
-    
-    [Title("Escape Bar Gameplay")]  
+
+    /// <summary>
+    /// The current strategy set to handle the hook.
+    /// </summary>
+    /// <remarks>
+    /// If none is assigned a default one will be.
+    /// </remarks>
+    public IHookStrategy HookStrategy
+    {
+        get => _hookStrategy;
+        set
+        {
+            _hookStrategy = value;
+            if (value == null) 
+                return;
+            value.Hook = _hook;                                    
+            value.BottomPivot = _bottomPivot;                      
+            value.TopPivot = _topPivot;
+        }
+    }
+
+
+    [Title("Escape Bar")]  
     // How per second the escape bar fills up, this bar uses it y scale to fill, 0 is empty and 1 is full.
     [SerializeField] public float _escapeBarIncrement = 0.3f;
-    
-    
-    [Title("Hook Gameplay")]
-    // The force added to the hook upwards.
-    [SerializeField] private float _hookUpForce = 0.01f;
-    // The force added to the hook downwards each frame.
-    [SerializeField] private float _hookGravity = 0.005f;
-    // How fast the hook can ascend.
-    [SerializeField] private float _hookMaxYVelocity = 0.02f;
-    // How fast the hook can descend.
-    [SerializeField] private float _hookMinYVelocity = -0.04f;
+
+
+    [Title("Hook")] 
     // How much per second the hook decrements from the escape bar
-    [SerializeField] public float _hookEscapeDecrement = 0.1f;  
-    
-    
-    [Title("Hook Debugging")]
-    // Current speed which the hook area is moving in the Y-axis.
-    [ReadOnly, SerializeField] private float _hookYVelocity; 
-    // A value from 1 to 0 used to interpolate in a lerp the hook between the top and bottom pivots.
-    [ReadOnly, SerializeField, Range(0,1)] private float _hookPosition;
+    [SerializeField] public float _hookEscapeDecrement = 0.1f; 
+    // Backing field of its property.
+    [ShowInInspector, ReadOnly] private IHookStrategy _hookStrategy;    
+    private int _lastEncoderValue = 0;    
  
     
-    [Title("Fish Gameplay")]
+    [Title("Fish")]
     // Multiplies a rand number from 0 to 1, the bigger, the longer it takes to get a new destination.
     [SerializeField] public float _fishTimerMultiplier = 1f; 
     // The value used in the fish's SmoothDump motion, the closer to 0, the quicker.
     [SerializeField] public float _fishSmoothMotion = 0.5f;
-    
-    
-    [Title("Fish Debugging")]
     // Internal Velocity used by the smooth Damp.
     [ReadOnly, SerializeField] private float _fishYVelocity;
     // Timer responsible to set a new destination.
@@ -76,6 +73,18 @@ public class FishingBars : MonoBehaviour
     [ReadOnly, SerializeField, Range(0,1)] private float _fishDestination;
     // A value from 1 to 0 used to interpolate in a lerp the fish between the top and bottom pivots.
     [ReadOnly, SerializeField, Range(0,1)] private float _fishPosition;
+
+    
+    [Title("References")]                                    
+    [SerializeField] private Transform _topPivot;             
+    [SerializeField] private Transform _bottomPivot;          
+    [SerializeField] private Transform _fishIndicator;        
+    [SerializeField] private Transform _hook;                 
+    [SerializeField] private Transform _hookUpperLimit;       
+    [SerializeField] private Transform _hookLowerLimit;       
+    [SerializeField] private Image _hookImage;                
+    [SerializeField] private Transform _escapeBarFill;
+
 
     private void Awake()
     {
@@ -93,6 +102,10 @@ public class FishingBars : MonoBehaviour
 
     void Update()
     {
+        if (HookStrategy == null)                                             
+            HookStrategy = gameObject.AddComponent<TouchHookStrategy>();      
+        HookStrategy.CanRun = CanRun;
+        
         if (!CanRun)
             return;
         
@@ -106,24 +119,14 @@ public class FishingBars : MonoBehaviour
             HasFishEscaped = true;
     }
 
-    private void FixedUpdate()
-    {
-        if (!CanRun)
-            return;
-        
-        UpdateHook();
-    }
-
     private void UpdateFishTimer()
     {
         _fishNewDestTimer -= Time.deltaTime;
-        
         if (_fishNewDestTimer <= 0)
         {
             // Gets a new random value for the fish's from 0 to 1,
             // and multiplies it by the timer multiplayer.
             _fishNewDestTimer = Random.value * _fishTimerMultiplier;
-            
             // Assigns a new destination being a random number from 0 to 1.
             // Representing the distance between the top and bottom position.
             _fishDestination = Random.value;
@@ -136,62 +139,6 @@ public class FishingBars : MonoBehaviour
         // Then, lerps the fish's real position towards that previous (0 to 1) internal position, using the pivots.
         _fishPosition = Mathf.SmoothDamp(_fishPosition, _fishDestination, ref _fishYVelocity, _fishSmoothMotion);
         _fishIndicator.position = Vector3.Lerp(_bottomPivot.position, _topPivot.position, _fishPosition);
-    }
-    
-    private void UpdateHook()
-    {
-        JNetoArduinoHttpClient jNetoArduinoHttpClient = FindObjectOfType<JNetoArduinoHttpClient>();
-        // FORCES ON THE HOOK SPECIAL CONTROLLER
-        if (jNetoArduinoHttpClient.IsConnected)
-        {
-            if (lastEncoderValue != jNetoArduinoHttpClient.EncoderValue)
-            {
-                Debug.Log("FORCE");
-                _hookYVelocity += _hookUpForce * 10;
-                
-                // Removes accumulated velocity when the hook area has reached the top pivot, otherwise it gets stuck.
-                if (Mathf.Approximately(_hookPosition, 1))
-                    _hookYVelocity = 0;
-                
-            }
-            lastEncoderValue = jNetoArduinoHttpClient.EncoderValue;
-        }
-        
-        // FORCES ON THE HOOK TOUCH SCREEN
-        // Applies upwards force to the hook if the required input is received.
-        // Then, Applies Gravity to the hook velocity.
-        else if (Input.touchCount > 0)
-        {     
-            // The negative velocity used for fall can accumulate and take too long to be beaten.
-            // So, if there is any accumulated negative velocity, it must be eliminated once an input is detected.
-            if (_hookYVelocity < 0)
-                _hookYVelocity = 0;
-            
-            _hookYVelocity += _hookUpForce;
-            
-            // Removes accumulated velocity when the hook area has reached the top pivot, otherwise it gets stuck.
-            if (Mathf.Approximately(_hookPosition, 1))
-                _hookYVelocity = 0;
-            
-            Debug.Log("Hook Input");
-        }
-
-        // IN CASE OF NO INPUTS
-        // Removes accumulated velocity when the hook area has reached the bottom pivot, otherwise it gets stuck.
-        else if (Mathf.Approximately(_hookPosition, 0))
-        {
-            _hookYVelocity = 0;
-        }
-        
-        _hookYVelocity -= _hookGravity;
-        _hookYVelocity = Mathf.Clamp(_hookYVelocity, _hookMinYVelocity, _hookMaxYVelocity);
-        
-        // Applies the hook's Y velocity to its internal position (0 to 1 value)
-        // Makes sure to keep it in range by clamping it.
-        // Then, lerps the hook's real position towards that previous (0 to 1) internal position, using the pivots.
-        _hookPosition += _hookYVelocity;
-        _hookPosition = Mathf.Clamp01(_hookPosition);
-        _hook.position = Vector3.Lerp(_bottomPivot.position, _topPivot.position, _hookPosition);
     }
     
     private void UpdateEscapeBar()
@@ -215,7 +162,9 @@ public class FishingBars : MonoBehaviour
     public void ResetTheBars()
     {
         _fishPosition = 0;
-        _hookPosition = 0;
+        
+        if (HookStrategy != null)
+            HookStrategy.ResetHook();
         
         Vector3 newScale = _escapeBarFill.localScale;
         newScale.y = 0;

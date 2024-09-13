@@ -1,5 +1,6 @@
-using Interfaces;
+using Sirenix.OdinInspector;
 using UnityEngine;
+
 
 public class TouchHookStrategy : MonoBehaviour, IHookStrategy
 {
@@ -21,9 +22,9 @@ public class TouchHookStrategy : MonoBehaviour, IHookStrategy
 
     
     // Current speed which the hook area is moving in the Y-axis.
-    private float _hookYVelocity;
+    [ReadOnly, SerializeField] private float _hookYVelocity;
     // A value from 1 to 0 used to interpolate in a lerp the hook between the top and bottom pivots.     
-    private float _hookPosition;
+    [ReadOnly, SerializeField] private float _hookPosition;
     
     
     private void FixedUpdate()
@@ -59,7 +60,10 @@ public class TouchHookStrategy : MonoBehaviour, IHookStrategy
             _hookYVelocity = 0;
         }
         
+        // applies gravity.
         _hookYVelocity -= HookGravity;
+        
+        // Keeps the velocity in the Min/Max range.
         _hookYVelocity = Mathf.Clamp(_hookYVelocity, HookMinYVelocity, HookMaxYVelocity);
         
         // Applies the hook's Y velocity to its internal position (0 to 1 value)
@@ -73,6 +77,7 @@ public class TouchHookStrategy : MonoBehaviour, IHookStrategy
     public void ResetHook()
     {
         _hookPosition = 0;
+        _hookYVelocity = 0;
     }
     
 }

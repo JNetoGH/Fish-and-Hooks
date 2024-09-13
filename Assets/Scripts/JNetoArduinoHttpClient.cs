@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -46,10 +47,20 @@ public class JNetoArduinoHttpClient : MonoBehaviour
     [SerializeField] private string _ledOnUrl = "http://192.168.4.1/H";
     // Arduino server´s URL for turning a LED off.
     [SerializeField] private string _ledOffUrl = "http://192.168.4.1/L";
-
+    // Represents the game logic itself.
+    private FishingBars _fishingBars;
+    
     private void Start()
     {
+        _fishingBars = FindObjectOfType<FishingBars>();
         StartCoroutine(ReadEncoderValue());
+    }
+
+    private void Update()
+    {
+        // Once the game has connection from the HTTP server, the right hook strategy will be set.
+        if (IsConnected && _fishingBars.HookStrategy is not ArduinoHookStrategy)
+            _fishingBars.HookStrategy = _fishingBars.AddComponent<ArduinoHookStrategy>();
     }
 
     private IEnumerator ReadEncoderValue()

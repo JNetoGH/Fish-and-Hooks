@@ -1,4 +1,4 @@
-using Interfaces;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,8 +38,16 @@ public class FishingBars : MonoBehaviour
         set
         {
             _hookStrategy = value;
+            
             if (value == null) 
                 return;
+
+            // Removing other possible Hook strategies
+            foreach (IHookStrategy strategy in GetComponents<IHookStrategy>())
+                if (strategy != value)
+                    Destroy(strategy as Component);
+            
+            // Setting the dependencies of this strategy.
             value.Hook = _hook;                                    
             value.BottomPivot = _bottomPivot;                      
             value.TopPivot = _topPivot;

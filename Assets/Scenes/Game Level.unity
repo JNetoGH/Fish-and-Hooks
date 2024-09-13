@@ -340,6 +340,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f69954cc1414197aa8d69f88b72e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CanRun>k__BackingField: 0
+  <IsFishInHooksRange>k__BackingField: 0
+  <HasFishEscaped>k__BackingField: 0
+  _escapeBarIncrement: 0.3
+  _hookEscapeDecrement: 0.1
+  _fishTimerMultiplier: 1
+  _fishSmoothMotion: 0.5
+  _fishYVelocity: 0
+  _fishNewDestTimer: 0
+  _fishDestination: 0
+  _fishPosition: 0
   _topPivot: {fileID: 1518868715}
   _bottomPivot: {fileID: 1760457292}
   _fishIndicator: {fileID: 92794135}
@@ -348,20 +359,6 @@ MonoBehaviour:
   _hookLowerLimit: {fileID: 580429255}
   _hookImage: {fileID: 619439385}
   _escapeBarFill: {fileID: 1168337844}
-  _escapeBarIncrement: 0.3
-  _hookUpForce: 0.003
-  _hookGravity: 0.002
-  _hookMaxYVelocity: 0.02
-  _hookMinYVelocity: -0.04
-  _hookEscapeDecrement: 0.1
-  _hookYVelocity: 0
-  _hookPosition: 0
-  _fishTimerMultiplier: 1
-  _fishSmoothMotion: 0.5
-  _fishYVelocity: 0
-  _fishNewDestTimer: 0
-  _fishDestination: 0
-  _fishPosition: 0
 --- !u!1 &407872726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2665,10 +2662,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7801e1c2a1ca9dd4db497c5e40c8fb5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsConnected>k__BackingField: 0
   <EncoderValue>k__BackingField: 0
-  _url: http://192.168.4.1/value
+  _isConnected: 0
+  _encoderValueUrl: http://192.168.4.1/value
   _updateInterval: 0
+  _ledOnUrl: http://192.168.4.1/H
+  _ledOffUrl: http://192.168.4.1/L
 --- !u!4 &1454395925
 Transform:
   m_ObjectHideFlags: 0

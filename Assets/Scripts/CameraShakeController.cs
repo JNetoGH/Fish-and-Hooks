@@ -18,9 +18,10 @@ public class CameraShakeController : MonoBehaviour
    
     
     [Title("Debugging")]
+    [SerializeField, ReadOnly] private FishingBars _fishingBars; 
+    [SerializeField, ReadOnly] private Transform _escapeBarFill; 
     [SerializeField, ReadOnly] private CinemachineVirtualCamera _vCam;
     [SerializeField, ReadOnly] private CinemachineBasicMultiChannelPerlin _perlin;
-    [SerializeField, ReadOnly] private Transform _escapeBarFill; 
     [SerializeField, ReadOnly] private float _escapeBarFillScaleY;    
     [SerializeField, ReadOnly] private float _shakeIntensity;     
     
@@ -33,10 +34,19 @@ public class CameraShakeController : MonoBehaviour
     private void Start()
     {
         _escapeBarFill = GameObject.FindGameObjectWithTag("EscapeBarFill").transform;
+        _fishingBars = FindObjectOfType<FishingBars>();
     }
 
     private void Update()
     {
+        // Applies the minimum shake while not running the game.
+        // Then, returns.
+        if (!_fishingBars.CanRun)
+        {
+            _perlin.m_FrequencyGain =_minShake;
+            return;
+        }
+
         if (_escapeBarFill is null)
             return;
 

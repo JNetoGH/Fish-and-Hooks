@@ -14,8 +14,7 @@ public class CameraShakeController : MonoBehaviour
     [Title("Parameters")]  
     [SerializeField] float _minShake = 0.5f;
     [SerializeField] float _maxShake = 3f;
-    [SerializeField, Range(0, 1)] float _startScalingAt = 0.3f;                           
-   
+    [SerializeField, Range(0, 1)] float _startScalingAt = 0.3f;
     
     [Title("Debugging")]
     [SerializeField, ReadOnly] private FishingBars _fishingBars; 
@@ -33,7 +32,7 @@ public class CameraShakeController : MonoBehaviour
     
     private void Start()
     {
-        _escapeBarFill = GameObject.FindGameObjectWithTag("EscapeBarFill").transform;
+        _escapeBarFill = GameObject.FindWithTag("EscapeBarFill").transform;
         _fishingBars = FindObjectOfType<FishingBars>();
     }
 
@@ -46,7 +45,6 @@ public class CameraShakeController : MonoBehaviour
             _perlin.m_FrequencyGain = _minShake;
             return;
         }
-
         // Checks if the bar's fill is null, if so, tries to find it.
         if (_escapeBarFill is null)
         {
@@ -54,7 +52,6 @@ public class CameraShakeController : MonoBehaviour
             if (_escapeBarFill is null)
                 return;
         }
-        
         ScaleWithEscapeBar();
     }
 
@@ -66,8 +63,9 @@ public class CameraShakeController : MonoBehaviour
         // Only apply shaking if the fill scale Y is greater than x
         if (_escapeBarFillScaleY > _startScalingAt)
         {
-            // Maps the Y scale to the shake intensity range, starting from x
-            float normalizedScaleY = (_escapeBarFillScaleY - _startScalingAt) * 2f; // Normalizes from x to 1, remapping to 0 to 1
+            // Maps the Y scale to the shake intensity range, starting from x.
+            // Normalizes from x to 1, remapping to 0 to 1.
+            float normalizedScaleY = (_escapeBarFillScaleY - _startScalingAt) * 2f; 
             _shakeIntensity = Mathf.Lerp(_minShake, _maxShake, normalizedScaleY);
         }
         else
@@ -79,4 +77,5 @@ public class CameraShakeController : MonoBehaviour
         // Applies the shake intensity to the Perlin noise component.
         _perlin.m_FrequencyGain = _shakeIntensity;
     }
+    
 }

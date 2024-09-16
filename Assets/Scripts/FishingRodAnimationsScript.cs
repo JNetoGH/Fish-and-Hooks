@@ -6,13 +6,13 @@ using UnityEngine.Serialization;
 public class FishingRodAnimationsScript : MonoBehaviour
 { 
     [Title("Parameters")]  
-    [SerializeField] float _minAniSpeed = 0.8f;
-    [SerializeField] float _maxAniSpeed = 1.8f;
-    [SerializeField, Range(0, 1)] float _startScalingAt = 0.4f;    
+    [SerializeField] private float _minAniSpeed = 0.8f;
+    [SerializeField] private float _maxAniSpeed = 1.8f;
+    [SerializeField, Range(0, 1)] private float _startScalingAt = 0.4f;    
     
     [Title("Debugging")]  
     [SerializeField, ReadOnly] private float _escapeBarFillScaleY;    
-    [FormerlySerializedAs("_shakeIntensity")] [SerializeField, ReadOnly] private float _animationSpeed; 
+    [SerializeField, ReadOnly] private float _animationSpeed; 
     
     [Title("References")]  
     [SerializeField, ReadOnly] private FishingBars _fishingBars;
@@ -25,7 +25,7 @@ public class FishingRodAnimationsScript : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _fishingBars = FindObjectOfType<FishingBars>();
-        _escapeBarFill = GameObject.FindGameObjectWithTag("EscapeBarFill").transform;
+        _escapeBarFill = GameObject.FindWithTag("EscapeBarFill").transform;
     }
 
     private void Update()
@@ -45,8 +45,9 @@ public class FishingRodAnimationsScript : MonoBehaviour
         // Only apply a new speed if the fill scale Y is greater than x
         if (_escapeBarFillScaleY > _startScalingAt)
         {
-            // Maps the Y scale to the shake intensity range, starting from x
-            float normalizedScaleY = (_escapeBarFillScaleY - _startScalingAt) * 2f; // Normalizes from x to 1, remapping to 0 to 1
+            // Maps the Y scale to the shake intensity range, starting from x.
+            // Normalizes from x to 1, remapping to 0 to 1.
+            float normalizedScaleY = (_escapeBarFillScaleY - _startScalingAt) * 2f;
             _animationSpeed = Mathf.Lerp(_minAniSpeed, _maxAniSpeed, normalizedScaleY);
         }
         else

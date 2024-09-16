@@ -2727,6 +2727,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1353931842088319115}
+  - component: {fileID: 8917817841916699372}
   - component: {fileID: 8178063034787537370}
   m_Layer: 0
   m_Name: Rod pivot
@@ -2751,6 +2752,25 @@ Transform:
   - {fileID: 2386634348453364551}
   m_Father: {fileID: 4305804852838399227}
   m_LocalEulerAnglesHint: {x: 18.45, y: 173.47858, z: 0}
+--- !u!114 &8917817841916699372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7794487268432701820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b656f619f04651ae7ffa073c315532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minAniSpeed: 0.8
+  _maxAniSpeed: 1.8
+  _startScalingAt: 0.4
+  _escapeBarFillScaleY: 0
+  _animationSpeed: 0
+  _fishingBars: {fileID: 2764524464385548642}
+  _escapeBarFill: {fileID: 0}
 --- !u!95 &8178063034787537370
 Animator:
   serializedVersion: 5

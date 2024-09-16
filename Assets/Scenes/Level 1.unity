@@ -1120,17 +1120,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 407408, guid: de8aa2df2104223408d6515216cc3729, type: 3}
   m_PrefabInstance: {fileID: 440184639}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &507545934 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2764524464385548642, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
-  m_PrefabInstance: {fileID: 810680040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f69954cc1414197aa8d69f88b72e6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &520476295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1765,10 +1754,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7794487268432701820, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 874904749}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
 --- !u!1 &813750910
 GameObject:
@@ -1855,24 +1841,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de8aa2df2104223408d6515216cc3729, type: 3}
---- !u!1 &874904746 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7794487268432701820, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
-  m_PrefabInstance: {fileID: 810680040}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &874904749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874904746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81b656f619f04651ae7ffa073c315532, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fishingBars: {fileID: 507545934}
 --- !u!1001 &964584205
 PrefabInstance:
   m_ObjectHideFlags: 0

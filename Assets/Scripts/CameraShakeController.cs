@@ -43,31 +43,40 @@ public class CameraShakeController : MonoBehaviour
         // Then, returns.
         if (!_fishingBars.CanRun)
         {
-            _perlin.m_FrequencyGain =_minShake;
+            _perlin.m_FrequencyGain = _minShake;
             return;
         }
 
+        // Checks if the bar's fill is null, if so, tries to find it.
         if (_escapeBarFill is null)
-            return;
+        {
+            _escapeBarFill = GameObject.FindGameObjectWithTag("EscapeBarFill").transform;
+            if (_escapeBarFill is null)
+                return;
+        }
+        
+        ScaleWithEscapeBar();
+    }
 
+    private void ScaleWithEscapeBar()
+    {
         // Gets the escape bar's fill Y scale
         _escapeBarFillScaleY = _escapeBarFill.localScale.y;
 
-        // Only apply shaking if the fill scale Y is greater than 0.5
+        // Only apply shaking if the fill scale Y is greater than x
         if (_escapeBarFillScaleY > _startScalingAt)
         {
-            // Maps the Y scale to the shake intensity range, starting from 0.5
-            float normalizedScaleY = (_escapeBarFillScaleY - _startScalingAt) * 2f; // Normalizes from 0.5 to 1, remapping to 0 to 1
+            // Maps the Y scale to the shake intensity range, starting from x
+            float normalizedScaleY = (_escapeBarFillScaleY - _startScalingAt) * 2f; // Normalizes from x to 1, remapping to 0 to 1
             _shakeIntensity = Mathf.Lerp(_minShake, _maxShake, normalizedScaleY);
         }
         else
         {
-            // No shaking if the fill is below or equal to half
+            // If the fill is below or equal to x, the applied value will be the minimum.
             _shakeIntensity = _minShake;
         }
 
         // Applies the shake intensity to the Perlin noise component.
         _perlin.m_FrequencyGain = _shakeIntensity;
     }
-    
 }

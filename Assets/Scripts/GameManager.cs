@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
         RunNewGame();                                              
     }                                                              
     
-    [Button]
     public void RunNewGame()
     {
         _newGamePanel.SetActive(false);

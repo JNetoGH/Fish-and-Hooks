@@ -932,6 +932,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413218, guid: 826b6a0b570e8460990010fa615b5a2a, type: 3}
   m_PrefabInstance: {fileID: 2114027826}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &271767764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1064562265532971862, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+  m_PrefabInstance: {fileID: 5487746443454843167}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &297447240
 GameObject:
   m_ObjectHideFlags: 0
@@ -5934,6 +5939,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1819818398868192619, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: _fishingUI
+      value: 
+      objectReference: {fileID: 271767764}
     - target: {fileID: 1944004004118960676, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: m_Name
       value: Fishing Game

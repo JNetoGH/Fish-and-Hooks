@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     
     [Title("References")]
+    [SerializeField] private GameObject _fishingUI;
     [SerializeField] private GameObject _newGamePanel;
     [SerializeField] private GameObject _welcomeText; 
     [SerializeField] private GameObject _victoryText;
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
     
     public void RunNewGame()
     {
+        _fishingUI.SetActive(true);
         _newGamePanel.SetActive(false);
         _welcomeText.SetActive(false);
         _victoryText.SetActive(false);   
@@ -77,6 +80,11 @@ public class GameManager : MonoBehaviour
         _fishingBars.CanRun = true;
     }
     
+    private void Start()
+    {
+        _fishingUI.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -102,6 +110,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("You Lose");  
             _isRunning = false;    
             _newGamePanel.SetActive(true);  
+            _fishingUI.SetActive(false);
             _defeatText.SetActive(true);    
         }
     }

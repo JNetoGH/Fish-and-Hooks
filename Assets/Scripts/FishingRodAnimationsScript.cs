@@ -15,8 +15,8 @@ public class FishingRodAnimationsScript : MonoBehaviour
     [SerializeField, ReadOnly] private float _animationSpeed; 
     
     [Title("References")]  
-    [SerializeField, ReadOnly] private FishingBars _fishingBars;
-    [SerializeField, ReadOnly] private Transform _escapeBarFill; 
+    [SerializeField] private FishingBars _fishingBars;
+    [SerializeField] private Transform _escapeBarFill; 
     private Animator _animator;
     
     private static readonly int Fishing = Animator.StringToHash("Fishing");
@@ -24,8 +24,6 @@ public class FishingRodAnimationsScript : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _fishingBars = FindObjectOfType<FishingBars>();
-        _escapeBarFill = GameObject.FindWithTag("EscapeBarFill").transform;
     }
 
     private void Update()

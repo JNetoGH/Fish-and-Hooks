@@ -17,27 +17,26 @@ public class CameraShakeController : MonoBehaviour
     [SerializeField, Range(0, 1)] float _startScalingAt = 0.3f;
     
     [Title("Debugging")]
-    [SerializeField, ReadOnly] private FishingBars _fishingBars; 
-    [SerializeField, ReadOnly] private Transform _escapeBarFill; 
     [SerializeField, ReadOnly] private CinemachineVirtualCamera _vCam;
     [SerializeField, ReadOnly] private CinemachineBasicMultiChannelPerlin _perlin;
     [SerializeField, ReadOnly] private float _escapeBarFillScaleY;    
     [SerializeField, ReadOnly] private float _shakeIntensity;     
+    
+    [Title("References")]
+    [SerializeField] private FishingBars _fishingBars; 
+    [SerializeField] private Transform _escapeBarFill;
     
     private void Awake()
     {
         _vCam = GetComponent<CinemachineVirtualCamera>();
         _perlin = _vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
-    
-    private void Start()
-    {
-        _escapeBarFill = GameObject.FindWithTag("EscapeBarFill").transform;
-        _fishingBars = FindObjectOfType<FishingBars>();
-    }
 
     private void Update()
     {
+        if (_fishingBars is null)
+            return;
+        
         // Applies the minimum shake while not running the game.
         // Then, returns.
         if (!_fishingBars.CanRun)
@@ -45,13 +44,11 @@ public class CameraShakeController : MonoBehaviour
             _perlin.m_FrequencyGain = _minShake;
             return;
         }
+        
         // Checks if the bar's fill is null, if so, tries to find it.
         if (_escapeBarFill is null)
-        {
-            _escapeBarFill = GameObject.FindGameObjectWithTag("EscapeBarFill").transform;
-            if (_escapeBarFill is null)
-                return;
-        }
+            return;
+        
         ScaleWithEscapeBar();
     }
 

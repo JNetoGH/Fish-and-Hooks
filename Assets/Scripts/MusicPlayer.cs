@@ -11,11 +11,10 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;         // Reference to the AudioSource component
     [SerializeField] private Slider _volumeSlider;             // Reference to the volume slider in the UI
     [SerializeField] private AudioClip[] _playlist;            // Array of songs to play
-
     
     [Title("Debugging")]
     [SerializeField, ReadOnly] private int _currentSongIndex = 0;       // Tracks the index of the current song
-    [SerializeField, ReadOnly] private float _currentVolume = 1;        // Tracks the volume level
+    [SerializeField, ReadOnly] private float _currentVolume = 0.15f;        // Tracks the volume level
     
     private string _saveFilePath;            // Path for saving and loading JSON data
 

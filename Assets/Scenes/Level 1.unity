@@ -2592,9 +2592,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 222675322454315329, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 222675322454315329, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 984373957142373395, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 984373957142373395, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 984373957142373395, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: m_Color.a
       value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114730824996415511, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5161432377572748034, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: m_Name
@@ -2604,13 +2624,29 @@ PrefabInstance:
       propertyPath: m_Lens.FarClipPlane
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 6447103217101171297, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447103217101171297, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6447103217101171297, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447103217101171297, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7228673101316950798, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7856439778601888226, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8356589648859111925, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2656,6 +2692,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8709402749867812021, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709402749867812021, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818584372815913535, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178173776654743569, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178173776654743569, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9178173776654743569, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: m_Color.a
       value: 0.8627451

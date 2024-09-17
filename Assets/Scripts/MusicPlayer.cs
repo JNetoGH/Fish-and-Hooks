@@ -54,10 +54,6 @@ public class MusicPlayer : MonoBehaviour
         {
             // Move to the next song, looping if necessary
             _currentSongIndex = (_currentSongIndex + 1) % _playlist.Length;
-
-            // Save the new song index and volume to JSON
-            SaveDataToFile();
-
             // Play the next song
             PlaySong(_currentSongIndex);
         }
@@ -66,8 +62,10 @@ public class MusicPlayer : MonoBehaviour
     // Play the song at the given index
     private void PlaySong(int index)
     {
-        if (_playlist.Length == 0) return; // If the playlist is empty, do nothing
-
+        // If the playlist is empty, do nothing.
+        if (_playlist.Length == 0) 
+            return; 
+        
         _audioSource.clip = _playlist[index];
         _audioSource.Play();
     }
@@ -116,11 +114,24 @@ public class MusicPlayer : MonoBehaviour
             _currentVolume = 0.5f;
         }
     }
-    
-    // Debugging purposes: clear the saved file
+
+    // Save on pause.
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+            SaveDataToFile();
+    }
+
+    // Save on focus lost.
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if(!hasFocus)
+            SaveDataToFile();
+    }
+
+    // Save on quit.
     private void OnApplicationQuit()
     {
-        // Optional: Save data when the application quits
         SaveDataToFile();
     }
 }

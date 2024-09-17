@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;   // Required for file handling
 using System;
+using System.Collections;
 using Sirenix.OdinInspector; // Required for serialization
 
 public class MusicPlayer : MonoBehaviour
@@ -14,7 +15,7 @@ public class MusicPlayer : MonoBehaviour
     
     [Title("Debugging")]
     [SerializeField, ReadOnly] private int _currentSongIndex = 0;       // Tracks the index of the current song
-    [SerializeField, ReadOnly] private float _currentVolume = 0.15f;        // Tracks the volume level
+    [SerializeField, ReadOnly] private float _currentVolume = 0.15f;    // Tracks the volume level
     
     private string _saveFilePath;            // Path for saving and loading JSON data
 
@@ -42,7 +43,7 @@ public class MusicPlayer : MonoBehaviour
             _volumeSlider.value = _currentVolume;
             _volumeSlider.onValueChanged.AddListener(ChangeVolume);
         }
-
+        
         // Start playing the song from the saved index
         PlaySong(_currentSongIndex);
     }
@@ -58,18 +59,36 @@ public class MusicPlayer : MonoBehaviour
             PlaySong(_currentSongIndex);
         }
     }
-
-    // Play the song at the given index
-    private void PlaySong(int index)
+    
+    // Plays a song asynchronously from the playlist at the given index.
+    // If the playlist is empty, the method exits early.
+    // The audio clip at the specified index is loaded asynchronously using LoadAudioData().
+    // The method waits until the audio data is fully loaded before assigning it to the AudioSource and starting playback.
+    // This helps prevent stuttering by not blocking the main thread during audio loading.
+    private IEnumerator PlaySongAsync(int index)
     {
-        // If the playlist is empty, do nothing.
         if (_playlist.Length == 0) 
-            return; 
+            yield break;
+    
+        AudioClip clip = _playlist[index];
+    
+        // Load audio data asynchronously.
+        clip.LoadAudioData();
+
+        // Wait until the audio data is loaded
+        while (!clip.loadState.Equals(AudioDataLoadState.Loaded))
+            yield return null; // Wait for the next frame
         
-        _audioSource.clip = _playlist[index];
+        _audioSource.clip = clip;
         _audioSource.Play();
     }
-
+    
+    // Modify PlaySong to use the coroutine.
+    private void PlaySong(int index)
+    {
+        StartCoroutine(PlaySongAsync(index));
+    }
+    
     // Change the volume using a slider and save the volume setting
     public void ChangeVolume(float volume)
     {

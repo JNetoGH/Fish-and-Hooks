@@ -58,7 +58,7 @@ public class CameraShakeController : MonoBehaviour
     private void ScaleWithEscapeBar()
     {
         // Gets the escape bar's fill Y scale
-        _escapeBarFillScaleY = _escapeBarFill.localScale.y;
+        _escapeBarFillScaleY = _escapeBarFill.localScale.x;
 
         // Only apply shaking if the fill scale Y is greater than x
         if (_escapeBarFillScaleY > _startScalingAt)

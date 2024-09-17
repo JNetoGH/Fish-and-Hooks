@@ -123,7 +123,7 @@ public class FishingBars : MonoBehaviour
                          _fishIndicator.position.y <= _hookUpperLimit.position.y);
         _hookImage.color = IsFishInHooksRange ? Color.green : Color.yellow;
         UpdateEscapeBar();
-        if (_escapeBarFill.localScale.y >= 1)
+        if (_escapeBarFill.localScale.x >= 1)
             HasFishEscaped = true;
     }
 
@@ -156,10 +156,10 @@ public class FishingBars : MonoBehaviour
         // Therefore a Clamp is required to keep it in grange
         Vector3 currentFillScale = _escapeBarFill.localScale;
         if (IsFishInHooksRange) 
-            currentFillScale.y -= _hookEscapeDecrement * Time.deltaTime;
+            currentFillScale.x -= _hookEscapeDecrement * Time.deltaTime;
         else 
-            currentFillScale.y += _escapeBarIncrement * Time.deltaTime;
-        currentFillScale.y = Mathf.Clamp01(currentFillScale.y);
+            currentFillScale.x += _escapeBarIncrement * Time.deltaTime;
+        currentFillScale.x = Mathf.Clamp01(currentFillScale.x);
         _escapeBarFill.localScale = currentFillScale;
     }
     
@@ -175,7 +175,7 @@ public class FishingBars : MonoBehaviour
             HookStrategy.ResetHook();
         
         Vector3 newScale = _escapeBarFill.localScale;
-        newScale.y = 0;
+        newScale.x = 0;
         _escapeBarFill.localScale = newScale;
         
         HasFishEscaped = false;

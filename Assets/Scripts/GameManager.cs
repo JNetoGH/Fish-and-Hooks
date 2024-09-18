@@ -9,23 +9,24 @@ using Debug = UnityEngine.Debug;
 public class GameManager : MonoBehaviour
 {
     
+    [Title("Gameplay")]   
+    [SerializeField] private float _countdownDuration = 15.5f;
+    [SerializeField] private float _displayEndGameMenuAfter = 3f;
+    
+    [FormerlySerializedAs("_countDown")]
+    [Title("Debugging")] 
+    [ReadOnly, SerializeField] private float _countdown = 0;
+    [ReadOnly, SerializeField] private bool _isRunning = false;
+    
     [Title("References")]
     [SerializeField] private GameObject _fishingUI;
     [SerializeField] private GameObject _newGamePanel;
     [SerializeField] private GameObject _welcomeText; 
     [SerializeField] private GameObject _victoryText;
     [SerializeField] private GameObject _defeatText;
-    
     [SerializeField] private FishingBars _fishingBars; 
     [SerializeField] private TextMeshProUGUI _countdownText; 
-    
-    [Title("Gameplay")]   
-    [SerializeField] private float _countdownDuration = 15.5f; 
-    
-    [FormerlySerializedAs("_countDown")]
-    [Title("Debugging")] 
-    [ReadOnly, SerializeField] private float _countdown = 0;
-    [ReadOnly, SerializeField] private bool _isRunning = false;
+    [SerializeField] private FishModelController _fishModelController;
     
     [Button]                                                    
     public void RunNewGameEasy()                                 
@@ -67,8 +68,9 @@ public class GameManager : MonoBehaviour
         RunNewGame();                                              
     }                                                              
     
-    public void RunNewGame()
+    private void RunNewGame()
     {
+        _fishModelController.ResetFish();
         _fishingUI.SetActive(true);
         _newGamePanel.SetActive(false);
         _welcomeText.SetActive(false);
@@ -86,7 +88,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!_isRunning) 
             return;
@@ -100,8 +102,9 @@ public class GameManager : MonoBehaviour
             _fishingBars.CanRun = false;
             Debug.Log("You Win");
             _isRunning = false;
-            _newGamePanel.SetActive(true);
-            _victoryText.SetActive(true);      
+            _fishingUI.SetActive(false);
+            _fishModelController.JumpTowardsTarget();
+            Invoke(nameof(ShowVictoryEndGameMenu), _displayEndGameMenuAfter);
         }
         else if (_fishingBars.HasFishEscaped)
         {
@@ -109,10 +112,21 @@ public class GameManager : MonoBehaviour
             _fishingBars.CanRun = false;
             Debug.Log("You Lose");  
             _isRunning = false;    
-            _newGamePanel.SetActive(true);  
             _fishingUI.SetActive(false);
-            _defeatText.SetActive(true);    
+           ShowDefeatEndGameMenu();
         }
+    }
+
+    private void ShowVictoryEndGameMenu()
+    {
+        _newGamePanel.SetActive(true);
+        _victoryText.SetActive(true); 
+    }
+    
+    private void ShowDefeatEndGameMenu()
+    {
+        _newGamePanel.SetActive(true);  
+        _defeatText.SetActive(true);    
     }
     
 }

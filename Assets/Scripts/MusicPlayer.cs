@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.IO;   // Required for file handling
 using System;
 using System.Collections;
-using Sirenix.OdinInspector; // Required for serialization
+using Sirenix.OdinInspector;
 
 public class MusicPlayer : MonoBehaviour
 {

@@ -4484,17 +4484,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413218, guid: 826b6a0b570e8460990010fa615b5a2a, type: 3}
   m_PrefabInstance: {fileID: 1168866519}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1715526229 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7480238365255953435, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
-  m_PrefabInstance: {fileID: 5487746443454843167}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 819199a7946a347869be15dba090a798, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1717432226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5840,25 +5829,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1819818398868192619, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
-      propertyPath: _fishModelController
-      value: 
-      objectReference: {fileID: 1715526229}
-    - target: {fileID: 1819818398868192619, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
-      propertyPath: _displayEndGameMenuAfter
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1944004004118960676, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: m_Name
       value: Fishing Game
-      objectReference: {fileID: 0}
-    - target: {fileID: 2139438276464829353, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7480238365255953435, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
-      propertyPath: _startRailAfter
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

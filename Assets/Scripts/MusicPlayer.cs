@@ -26,7 +26,7 @@ public class MusicPlayer : MonoBehaviour
         public float volume;
     }
 
-    void Start()
+    void Awake()
     {
         // Set the path for the save file in persistentDataPath
         _saveFilePath = Path.Combine(Application.persistentDataPath, "music_player_save.json");

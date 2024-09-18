@@ -2295,7 +2295,7 @@ MonoBehaviour:
   _jumpTowards: {fileID: 3943271260720323695}
   _jumpForce: 30
   _springForce: 10
-  _startRailAfter: 2
+  _startRailAfter: 1.5
 --- !u!33 &2656588951313900495
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2549,7 +2549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8964798658658719082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5234,7 +5234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countdownDuration: 15.5
-  _displayEndGameMenuAfter: 3
+  _displayEndGameMenuAfter: 4
   _countdown: 0
   _isRunning: 0
   _fishingUI: {fileID: 1064562265532971862}
@@ -5244,7 +5244,7 @@ MonoBehaviour:
   _defeatText: {fileID: 5395941578594331078}
   _fishingBars: {fileID: 845192079464270388}
   _countdownText: {fileID: 2933737644429749247}
-  _fishModelController: {fileID: 0}
+  _fishModelController: {fileID: 7480238365255953435}
 --- !u!1 &4521020314429534604
 GameObject:
   m_ObjectHideFlags: 0

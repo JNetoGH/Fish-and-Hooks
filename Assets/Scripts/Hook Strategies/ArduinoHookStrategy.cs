@@ -9,8 +9,8 @@ public class ArduinoHookStrategy : MonoBehaviour, IHookStrategy
     public Transform TopPivot { get; set; }
 
     // As constantes agora serão multiplicadas por Time.fixedDeltaTime para serem independentes de frame rate.
-    private const float HookUpDownForcePerSecond = 0.3f;
-    private const float HookTopYVelocityPerSecond = 2f;
+    private const float HookUpDownForcePerSecond = 0.2f;
+    private const float HookTopYVelocityPerSecond = 1.5f;
     private const float HookDragPerSecond = 0.04f;
 
     [ReadOnly, SerializeField] private float _hookPosition;

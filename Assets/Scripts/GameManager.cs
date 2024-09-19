@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _defeatText;
     [SerializeField] private FishingBars _fishingBars; 
     [SerializeField] private TextMeshProUGUI _countdownText; 
-    [SerializeField] private FishModelController _fishModelController;
+    [FormerlySerializedAs("_fishModelController")] [SerializeField] private FishCatchingController _fishCatchingController;
     
     [Button]                                                    
     public void RunNewGameEasy()                                 
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     
     private void RunNewGame()
     {
-        _fishModelController.ResetFish();
+        _fishCatchingController.ResetFish();
         _fishingUI.SetActive(true);
         _newGamePanel.SetActive(false);
         _welcomeText.SetActive(false);
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("You Win");
             _isRunning = false;
             _fishingUI.SetActive(false);
-            _fishModelController.JumpTowardsTarget();
+            _fishCatchingController.JumpTowardsTarget();
             Invoke(nameof(ShowVictoryEndGameMenu), _displayEndGameMenuAfter);
         }
         else if (_fishingBars.HasFishEscaped)

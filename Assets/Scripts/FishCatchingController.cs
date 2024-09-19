@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class FishModelController : MonoBehaviour
+public class FishCatchingController : MonoBehaviour
 {
 
     [SerializeField] private Transform _jumpTowards;

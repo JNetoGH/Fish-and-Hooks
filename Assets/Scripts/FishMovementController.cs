@@ -13,7 +13,7 @@ public class FishMovementController : MonoBehaviour
     private Vector3 CylinderCenter => _fishInitialPosition + _cylinderCenterOffset;
 
     // Movement variables
-    [SerializeField] private float _minDistance = 2;   // Minimum distance between waypoints
+    [SerializeField] private float _minDistance = 4;   // Minimum distance between waypoints
     [SerializeField] private float _moveSpeed = 3;     // Speed at which the fish moves
     [SerializeField] private float _rotationSpeed = 2; // Speed of rotation towards the target
     [SerializeField] private float _waitTime = 0;      // Time to wait at each point

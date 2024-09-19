@@ -1575,9 +1575,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5369871349837917022, guid: a1ae78f8ecde14f62956c7a29ddeac96, type: 3}
-      propertyPath: _difficulty
-      value: 1
+    - target: {fileID: 6721638574363984700, guid: a1ae78f8ecde14f62956c7a29ddeac96, type: 3}
+      propertyPath: _cylinderCenterOffset.z
+      value: -2.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

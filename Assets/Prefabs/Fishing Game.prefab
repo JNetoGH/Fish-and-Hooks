@@ -4356,7 +4356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4769533402331504560
 Transform:
   m_ObjectHideFlags: 0
@@ -5390,6 +5390,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2047307082022776061}
   - {fileID: 4769533402331504560}
   m_Father: {fileID: 6907758102514002859}
   m_LocalEulerAnglesHint: {x: 0, y: 22.92, z: 0}
@@ -5425,7 +5426,7 @@ MonoBehaviour:
   _cylinderHeight: 0.55
   _cylinderCenterOffset: {x: 0.65, y: -0.5, z: 3.35}
   _fishInitialPosition: {x: 80.11, y: -1.2000003, z: -129.35}
-  _minDistance: 2
+  _minDistance: 3
   _moveSpeed: 3
   _rotationSpeed: 2
   _waitTime: 0
@@ -5499,7 +5500,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.49999997
-  m_Height: 2.05
+  m_Height: 1.8
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5819976981043961662
@@ -10597,6 +10598,84 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1001 &2009669266414406422
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7496855659892575754}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.41
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+      propertyPath: m_Name
+      value: Fish Yellow Model
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+--- !u!4 &2047307082022776061 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bca80b157b46744368411ac5b1c45834, type: 3}
+  m_PrefabInstance: {fileID: 2009669266414406422}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7408747612340149171
 PrefabInstance:
   m_ObjectHideFlags: 0

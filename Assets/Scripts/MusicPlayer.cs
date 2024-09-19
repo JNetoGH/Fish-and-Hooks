@@ -28,6 +28,14 @@ public class MusicPlayer : MonoBehaviour
 
     void Awake()
     {
+        // Checking if there is only 1 instance.
+        MusicPlayer otherInScene = FindObjectOfType<MusicPlayer>();
+        if (otherInScene is not null && otherInScene != this)
+            Destroy(this.gameObject);
+        
+        // Keeps this instance.
+        DontDestroyOnLoad(this.gameObject);
+        
         // Set the path for the save file in persistentDataPath
         _saveFilePath = Path.Combine(Application.persistentDataPath, "music_player_save.json");
 

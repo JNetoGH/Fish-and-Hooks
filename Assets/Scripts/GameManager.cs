@@ -2,6 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     [ReadOnly, SerializeField] private bool _isRunning = false;
     
     [Title("References")]
+    [SerializeField] private GameObject _musicManagerPrefab;
     [SerializeField] private GameObject _fishingUI;
     [SerializeField] private GameObject _newGamePanel;
     [SerializeField] private GameObject _welcomeText; 
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
         _fishingBars._escapeBarIncrement = 0.2f;                
         _fishingBars._fishSmoothMotion = 0.7f;  
         _fishingBars._hookEscapeDecrement = 0.15f;     
-        RunNewGame();                                           
+        RunNewGame(0);                                           
     }                                                           
     
     [Button]                               
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour
         _fishingBars._escapeBarIncrement = 0.25f; 
         _fishingBars._fishSmoothMotion = 0.6f; 
         _fishingBars._hookEscapeDecrement = 0.125f;    
-        RunNewGame();
+        RunNewGame(1);
     }                                      
     
     [Button]                                              
@@ -55,7 +57,7 @@ public class GameManager : MonoBehaviour
         _fishingBars._escapeBarIncrement = 0.3f;
         _fishingBars._fishSmoothMotion = 0.5f;
         _fishingBars._hookEscapeDecrement = 0.1f;
-        RunNewGame();                                     
+        RunNewGame(2);                                     
     }                                                     
                                                                        
     [Button]                                                       
@@ -65,11 +67,13 @@ public class GameManager : MonoBehaviour
         _fishingBars._escapeBarIncrement = 0.4f;                   
         _fishingBars._fishSmoothMotion = 0.3f;                     
         _fishingBars._hookEscapeDecrement = 0.07f;                  
-        RunNewGame();                                              
+        RunNewGame(0);                                              
     }                                                              
     
-    private void RunNewGame()
+    private void RunNewGame(int sceneIndex)
     {
+        if (SceneManager.GetActiveScene().buildIndex != sceneIndex)
+            SceneManager.LoadScene(sceneIndex);
         _fishCatchingController.ResetFish();
         _fishingUI.SetActive(true);
         _newGamePanel.SetActive(false);
@@ -81,10 +85,15 @@ public class GameManager : MonoBehaviour
         _fishingBars.ResetTheBars();
         _fishingBars.CanRun = true;
     }
-    
+
     private void Start()
     {
         _fishingUI.SetActive(false);
+        
+        // Instantiates a new MusicManager in case there is None in the scene.
+        // The MusicPlayer script also checks if it is the only instance in the scene.
+        if (FindObjectOfType<MusicPlayer>() is null)
+            Instantiate(_musicManagerPrefab);
     }
 
     // Update is called once per frame

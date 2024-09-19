@@ -22,7 +22,7 @@ public class FishingRodAnimationsScript : MonoBehaviour
     [Title("References")]  
     [SerializeField] private FishingBars _fishingBars;
     [SerializeField] private Transform _escapeBarFill; 
-    [FormerlySerializedAs("_pivotanimator")] [FormerlySerializedAs("_animator")] [SerializeField] private Animator _pivotAnimator;
+    [SerializeField] private Animator _pivotAnimator;
     [SerializeField] private Animator _cableAnimator;
     
     private static readonly int Fishing = Animator.StringToHash("Fishing");

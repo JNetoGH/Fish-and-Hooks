@@ -10587,7 +10587,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2657231362997610660}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RunNewGameAtCurrentDifficulty
+        m_MethodName: RunNewGameForSetDifficulty
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10647,7 +10647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8295de0130f8c429b928d2f25f696cbb, type: 3}
       propertyPath: m_Name
-      value: fishingRodAni
+      value: Fishing Rod Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

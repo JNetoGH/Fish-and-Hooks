@@ -19,14 +19,13 @@ public class GameManager : MonoBehaviour
     }
     
     [Title("Gameplay")]   
+    [SerializeField] private Difficulty _difficulty = Difficulty.Easy;
     [SerializeField] private float _countdownDuration = 15.5f;
     [SerializeField] private float _displayEndGameMenuAfter = 3f;
     
-    [FormerlySerializedAs("_countDown")]
     [Title("Debugging")] 
     [ReadOnly, SerializeField] private float _countdown = 0;
     [ReadOnly, SerializeField] private bool _isRunning = false;
-    [ReadOnly, SerializeField] private Difficulty _difficulty = Difficulty.Easy;
     
     [Title("References")]
     [SerializeField] private GameObject _musicManagerPrefab;
@@ -48,9 +47,6 @@ public class GameManager : MonoBehaviour
         // The MusicPlayer script also checks if it is the only instance in the scene.
         if (FindObjectOfType<MusicPlayer>() is null)
             Instantiate(_musicManagerPrefab);
-        
-        // sets up the initial difficulty
-        _difficulty = Difficulty.Easy;
     }
     
     public void LoadLevel(int sceneIndex)
@@ -63,7 +59,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    public void RunNewGameAtCurrentDifficulty()
+    public void RunNewGameForSetDifficulty()
     {
         switch (_difficulty)
         {

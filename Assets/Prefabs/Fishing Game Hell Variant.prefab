@@ -128,7 +128,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 533202050030456322, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2657231362997610660, guid: d8223867fad864e02ac11c2376573f3d, type: 3}
       propertyPath: _difficulty

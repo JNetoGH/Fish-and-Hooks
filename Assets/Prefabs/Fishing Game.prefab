@@ -2677,7 +2677,6 @@ RectTransform:
   - {fileID: 7674164685090640700}
   - {fileID: 6893597939292435055}
   - {fileID: 3747477613146322595}
-  - {fileID: 3233749060947476589}
   m_Father: {fileID: 6745957779333319084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4946,11 +4945,11 @@ RectTransform:
   - {fileID: 5076161762459364798}
   - {fileID: 4853907722025918141}
   - {fileID: 3698613707765823855}
-  m_Father: {fileID: 178406012963405388}
+  m_Father: {fileID: 3120762017806057832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030518, y: 0}
+  m_AnchoredPosition: {x: 136.35074, y: -329.9999}
   m_SizeDelta: {x: 316.4, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5842127067934364094
@@ -5929,6 +5928,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7049076864854441269}
+  - {fileID: 3233749060947476589}
   m_Father: {fileID: 3747477613146322595}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -6973,11 +6973,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e56a5d53fc4144908806bb4fcddb351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _difficulty: 0
   _countdownDuration: 15.5
   _displayEndGameMenuAfter: 4
   _countdown: 0
   _isRunning: 0
-  _difficulty: 0
   _musicManagerPrefab: {fileID: 4276664304628179505, guid: b9888d3893e8d40329e75dba1301f5ed, type: 3}
   _fishingUI: {fileID: 8972529414947465708}
   _newGamePanel: {fileID: 1648079134975882922}

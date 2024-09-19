@@ -13,6 +13,7 @@ public class FishCatchingController : MonoBehaviour
     private SpringJoint _springJoint;
     private Vector3 _initialPosition;
     private Quaternion _initialRotation;
+    private FishMovementController _fishMovementController;
     
     void Awake()
     {
@@ -20,6 +21,7 @@ public class FishCatchingController : MonoBehaviour
         _initialRotation = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();
         _springJoint = GetComponent<SpringJoint>();
+        _fishMovementController = GetComponent<FishMovementController>();
         _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         StopStringJoint();
     }
@@ -28,6 +30,7 @@ public class FishCatchingController : MonoBehaviour
     public void JumpTowardsTarget()
     {
         _rigidbody.constraints = RigidbodyConstraints.None;
+        _fishMovementController.enabled = false;
         Vector3 jumpDirection = _jumpTowards.position - transform.position;
         _rigidbody.AddForce(jumpDirection.normalized * _jumpForce, ForceMode.Impulse);
         Invoke(nameof(StartStringJoint), _startRailAfter);
@@ -55,6 +58,7 @@ public class FishCatchingController : MonoBehaviour
         _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         transform.position = _initialPosition;
         transform.rotation = _initialRotation;
+        _fishMovementController.enabled = true;
     }
 
 }

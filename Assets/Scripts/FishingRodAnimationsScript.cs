@@ -5,37 +5,39 @@ using UnityEngine.Serialization;
 
 public class FishingRodAnimationsScript : MonoBehaviour
 { 
-    [Title("Parameters")]  
-    [SerializeField] private float _minAniSpeed = 0.8f;
-    [SerializeField] private float _maxAniSpeed = 1.8f;
+    [Title("Parameters Ani Pivot")]  
+    [SerializeField] private float _minAniSpeedPivot = 0.8f;
+    [SerializeField] private float _maxAniSpeedPivot = 1.8f;
     [SerializeField, Range(0, 1)] private float _startScalingAt = 0.4f;    
+   
+    [Title("Parameters Ani Cable")]  
+    [SerializeField] private float _minAniSpeedCable = 1f;
+    [SerializeField] private float _maxAniSpeedCable = 1.5f;
     
     [Title("Debugging")]  
     [SerializeField, ReadOnly] private float _escapeBarFillScaleY;    
-    [SerializeField, ReadOnly] private float _animationSpeed; 
+    [SerializeField, ReadOnly] private float _animationSpeedPivot;
+    [SerializeField, ReadOnly] private float _animationSpeedCable;
     
     [Title("References")]  
     [SerializeField] private FishingBars _fishingBars;
     [SerializeField] private Transform _escapeBarFill; 
-    private Animator _animator;
+    [FormerlySerializedAs("_pivotanimator")] [FormerlySerializedAs("_animator")] [SerializeField] private Animator _pivotAnimator;
+    [SerializeField] private Animator _cableAnimator;
     
     private static readonly int Fishing = Animator.StringToHash("Fishing");
     
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
-
     private void Update()
     {
         if (_fishingBars is null)
             return;
         
-        _animator.SetBool(Fishing, _fishingBars.CanRun);
-        ScaleWithEscapeBar();
+        _pivotAnimator.SetBool(Fishing, _fishingBars.CanRun);
+        _cableAnimator.SetBool(Fishing, _fishingBars.CanRun);
+        ScalePivotWithEscapeBar();
     }
     
-    private void ScaleWithEscapeBar()
+    private void ScalePivotWithEscapeBar()
     {
         // Gets the escape bar's fill Y scale
         _escapeBarFillScaleY = _escapeBarFill.localScale.x;
@@ -46,15 +48,19 @@ public class FishingRodAnimationsScript : MonoBehaviour
             // Maps the Y scale to the shake intensity range, starting from x.
             // Normalizes from x to 1, remapping to 0 to 1.
             float normalizedScaleY = (_escapeBarFillScaleY - _startScalingAt) * 2f;
-            _animationSpeed = Mathf.Lerp(_minAniSpeed, _maxAniSpeed, normalizedScaleY);
+            _animationSpeedPivot = Mathf.Lerp(_minAniSpeedPivot, _maxAniSpeedPivot, normalizedScaleY);
+            _animationSpeedCable = Mathf.Lerp(_minAniSpeedCable, _maxAniSpeedCable, normalizedScaleY);
         }
         else
         {
             // If the fill is below or equal to x, the applied value will be the minimum.
-            _animationSpeed = _minAniSpeed;
+            _animationSpeedPivot = _minAniSpeedPivot;
+            _animationSpeedCable = _minAniSpeedCable;
         }
 
         // Applies the scaled animation speed
-        _animator.speed = _animationSpeed;
+        _pivotAnimator.speed = _animationSpeedPivot;
+        _cableAnimator.speed = _animationSpeedCable;
     }
+    
 }

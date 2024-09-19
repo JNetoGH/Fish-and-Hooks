@@ -5321,12 +5321,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4773631355088750225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0083229905, y: -0.980693, z: 0.19062734, w: 0.04281809}
-  m_LocalPosition: {x: 0.00019982456, y: -0.24599016, z: -26.553398}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.024391716, y: -0.82824856, z: -0.55866075, w: 0.036162205}
+  m_LocalPosition: {x: 0.000019982455, y: 0.03258753, z: -0.034365416}
+  m_LocalScale: {x: 0.10000001, y: 0.1, z: 0.100000024}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3674084517446596032}
+  m_Father: {fileID: 7424497782602188082}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8301350361304206610
 Rigidbody:
@@ -7854,7 +7854,7 @@ GameObject:
   - component: {fileID: 5434180731709758539}
   - component: {fileID: 3152497982858319924}
   m_Layer: 0
-  m_Name: Rod pivot
+  m_Name: Fishing Rod Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7875,7 +7875,6 @@ Transform:
   m_Children:
   - {fileID: 7015361159560936536}
   - {fileID: 7946985590546140879}
-  - {fileID: 1169652946111078161}
   m_Father: {fileID: 3269854261692117210}
   m_LocalEulerAnglesHint: {x: 18.45, y: 173.47858, z: 0}
 --- !u!114 &5434180731709758539
@@ -7890,13 +7889,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b656f619f04651ae7ffa073c315532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minAniSpeed: 0.8
-  _maxAniSpeed: 1.8
+  _minAniSpeedPivot: 0.8
+  _maxAniSpeedPivot: 1.8
   _startScalingAt: 0.4
+  _minAniSpeedCable: 1
+  _maxAniSpeedCable: 1.5
   _escapeBarFillScaleY: 0
-  _animationSpeed: 0
+  _animationSpeedPivot: 0
+  _animationSpeedCable: 0
   _fishingBars: {fileID: 4159947787433923563}
   _escapeBarFill: {fileID: 9050914325966632640}
+  _pivotAnimator: {fileID: 3152497982858319924}
+  _cableAnimator: {fileID: 1799530518278012477}
 --- !u!95 &3152497982858319924
 Animator:
   serializedVersion: 5
@@ -10647,11 +10651,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 132915385596059265, guid: 8295de0130f8c429b928d2f25f696cbb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1169652946111078161}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8295de0130f8c429b928d2f25f696cbb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1799530518278012477}
   m_SourcePrefab: {fileID: 100100000, guid: 8295de0130f8c429b928d2f25f696cbb, type: 3}
 --- !u!4 &7015361159560936536 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8295de0130f8c429b928d2f25f696cbb, type: 3}
   m_PrefabInstance: {fileID: 7408747612340149171}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &7424497782602188082 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 132915385596059265, guid: 8295de0130f8c429b928d2f25f696cbb, type: 3}
+  m_PrefabInstance: {fileID: 7408747612340149171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7642680459562051298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8295de0130f8c429b928d2f25f696cbb, type: 3}
+  m_PrefabInstance: {fileID: 7408747612340149171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1799530518278012477
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642680459562051298}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2cc6b4cd022cf47ffa8f4ba6bcaa8ec1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

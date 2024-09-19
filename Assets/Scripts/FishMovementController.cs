@@ -13,10 +13,10 @@ public class FishMovementController : MonoBehaviour
     private Vector3 CylinderCenter => _fishInitialPosition + _cylinderCenterOffset;
 
     // Movement variables
-    public float minDistance = 2.0f;  // Minimum distance between waypoints
-    public float moveSpeed = 2.0f;    // Speed at which the fish moves
-    public float rotationSpeed = 2.0f; // Speed of rotation towards the target
-    public float waitTime = 1.0f;     // Time to wait at each point
+    [SerializeField] private float _minDistance = 2;   // Minimum distance between waypoints
+    [SerializeField] private float _moveSpeed = 3;     // Speed at which the fish moves
+    [SerializeField] private float _rotationSpeed = 2; // Speed of rotation towards the target
+    [SerializeField] private float _waitTime = 0;      // Time to wait at each point
 
     private Vector3 targetPosition;   // Current target position
     private bool isMoving;
@@ -44,11 +44,11 @@ public class FishMovementController : MonoBehaviour
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
 
         // Move the fish forward in the direction it's facing
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        transform.position += transform.forward * _moveSpeed * Time.deltaTime;
 
         // If the fish reaches the target, stop moving
         if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
@@ -62,14 +62,14 @@ public class FishMovementController : MonoBehaviour
     private IEnumerator MoveToTarget()
     {
         // Wait for some time before moving to the next point
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(_waitTime);
 
         // Get a new target position ensuring it's far enough from the current position
         Vector3 newPosition;
         do
         {
             newPosition = GetRandomPointWithinCylinder();
-        } while (Vector3.Distance(transform.position, newPosition) < minDistance);
+        } while (Vector3.Distance(transform.position, newPosition) < _minDistance);
 
         targetPosition = newPosition;
         isMoving = true;

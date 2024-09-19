@@ -2387,34 +2387,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6721638574363984700, guid: a1ae78f8ecde14f62956c7a29ddeac96, type: 3}
-      propertyPath: _cylinderRadius
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721638574363984700, guid: a1ae78f8ecde14f62956c7a29ddeac96, type: 3}
-      propertyPath: _fishInitialPosition.x
-      value: 195.53731
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721638574363984700, guid: a1ae78f8ecde14f62956c7a29ddeac96, type: 3}
-      propertyPath: _fishInitialPosition.y
-      value: -0.08378506
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721638574363984700, guid: a1ae78f8ecde14f62956c7a29ddeac96, type: 3}
-      propertyPath: _fishInitialPosition.z
-      value: 42.39725
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721638574363984700, guid: a1ae78f8ecde14f62956c7a29ddeac96, type: 3}
-      propertyPath: _cylinderCenterOffset.x
-      value: -1.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721638574363984700, guid: a1ae78f8ecde14f62956c7a29ddeac96, type: 3}
-      propertyPath: _cylinderCenterOffset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721638574363984700, guid: a1ae78f8ecde14f62956c7a29ddeac96, type: 3}
-      propertyPath: _cylinderCenterOffset.z
-      value: -1.31
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

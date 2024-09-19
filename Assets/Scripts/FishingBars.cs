@@ -63,9 +63,12 @@ public class FishingBars : MonoBehaviour
     [Title("Hook")] 
     // How much per second the hook decrements from the escape bar
     [SerializeField] public float _hookEscapeDecrement = 0.1f; 
+    // The color for when the fish is out of the hook.
+    [SerializeField] private Color _fishOutColor = Color.yellow; 
+    // The color for when the fish is in the hook.
+    [SerializeField] private Color _fishInColor = Color.green; 
     // Backing field of its property.
     [ShowInInspector, ReadOnly] private IHookStrategy _hookStrategy;    
-    private int _lastEncoderValue = 0;    
  
     
     [Title("Fish")]
@@ -121,7 +124,7 @@ public class FishingBars : MonoBehaviour
         UpdateFishPosition();
         IsFishInHooksRange = (_fishIndicator.position.y >= _hookLowerLimit.position.y &&
                          _fishIndicator.position.y <= _hookUpperLimit.position.y);
-        _hookImage.color = IsFishInHooksRange ? Color.green : Color.yellow;
+        _hookImage.color = IsFishInHooksRange ? _fishInColor : _fishOutColor;
         UpdateEscapeBar();
         if (_escapeBarFill.localScale.x >= 1)
             HasFishEscaped = true;

@@ -54,8 +54,6 @@ public class GameManager : MonoBehaviour
         // The current scene shouldn't be loaded.
         if (SceneManager.GetActiveScene().buildIndex == sceneIndex) 
             return;
-
-        _difficulty = (Difficulty) sceneIndex;
         SceneManager.LoadScene(sceneIndex);
     }
 

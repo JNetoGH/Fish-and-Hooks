@@ -10,7 +10,7 @@ using Debug = UnityEngine.Debug;
 public class GameManager : MonoBehaviour
 {
     
-    private enum Difficulty
+    protected enum Difficulty
     {
         Easy,
         Mid,
@@ -19,25 +19,24 @@ public class GameManager : MonoBehaviour
     }
     
     [Title("Gameplay")]   
-    [SerializeField] private Difficulty _difficulty = Difficulty.Easy;
+    [SerializeField] protected Difficulty _difficulty = Difficulty.Easy;
     [SerializeField] private float _countdownDuration = 15.5f;
-    [SerializeField] private float _displayEndGameMenuAfter = 3f;
+    [SerializeField] protected float _displayEndGameMenuAfter = 3f;
     
     [Title("Debugging")] 
-    [ReadOnly, SerializeField] private float _countdown = 0;
-    [ReadOnly, SerializeField] private bool _isRunning = false;
+    [ReadOnly, SerializeField] protected float _timer = 0;
+    [ReadOnly, SerializeField] protected bool _isRunning = false;
     
     [Title("References")]
-    [SerializeField] private GameObject _musicManagerPrefab;
-    [SerializeField] private GameObject _fishingUI;
-    [SerializeField] private GameObject _newGamePanel;
-    [SerializeField] private GameObject _welcomeText; 
-    [SerializeField] private GameObject _victoryText;
-    [SerializeField] private GameObject _defeatText;
-    [SerializeField] private FishingBars _fishingBars; 
-    [SerializeField] private TextMeshProUGUI _countdownText; 
-    [FormerlySerializedAs("_fishModelController")] [SerializeField] private FishCatchingController _fishCatchingController;
-    
+    [SerializeField] protected GameObject _musicManagerPrefab;
+    [SerializeField] protected GameObject _fishingUI;
+    [SerializeField] protected GameObject _newGamePanel;
+    [SerializeField] protected GameObject _welcomeText; 
+    [SerializeField] protected GameObject _victoryText;
+    [SerializeField] protected GameObject _defeatText;
+    [SerializeField] protected FishingBars _fishingBars; 
+    [SerializeField] protected TextMeshProUGUI _countdownText; 
+    [SerializeField] protected FishCatchingController _fishCatchingController;
     
     private void Start()
     {
@@ -47,6 +46,36 @@ public class GameManager : MonoBehaviour
         // The MusicPlayer script also checks if it is the only instance in the scene.
         if (FindObjectOfType<MusicPlayer>() is null)
             Instantiate(_musicManagerPrefab);
+    }
+    
+    // Update is called once per frame
+    private void Update()
+    {
+        if (!_isRunning) 
+            return;
+        
+        _timer -= Time.deltaTime;
+        _countdownText.text = ((int)_timer).ToString("00");
+        
+        if (_timer <= 0)
+        {
+            // win 
+            _fishingBars.CanRun = false;
+            Debug.Log("You Win");
+            _isRunning = false;
+            _fishingUI.SetActive(false);
+            _fishCatchingController.JumpTowardsTarget();
+            Invoke(nameof(ShowVictoryEndGameMenu), _displayEndGameMenuAfter);
+        }
+        else if (_fishingBars.HasFishEscaped)
+        {
+            // defeat
+            _fishingBars.CanRun = false;
+            Debug.Log("You Lose");  
+            _isRunning = false;    
+            _fishingUI.SetActive(false);
+            ShowDefeatEndGameMenu();
+        }
     }
     
     public void LoadLevel(int sceneIndex)
@@ -116,49 +145,19 @@ public class GameManager : MonoBehaviour
         _welcomeText.SetActive(false);
         _victoryText.SetActive(false);   
         _defeatText.SetActive(false);   
-        _countdown = _countdownDuration;
+        _timer = _countdownDuration;
         _isRunning = true;
         _fishingBars.ResetTheBars();
         _fishingBars.CanRun = true;
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if (!_isRunning) 
-            return;
-        
-        _countdown -= Time.deltaTime;
-        _countdownText.text = ((int)_countdown).ToString("00");
-        
-        if (_countdown <= 0)
-        {
-            // win 
-            _fishingBars.CanRun = false;
-            Debug.Log("You Win");
-            _isRunning = false;
-            _fishingUI.SetActive(false);
-            _fishCatchingController.JumpTowardsTarget();
-            Invoke(nameof(ShowVictoryEndGameMenu), _displayEndGameMenuAfter);
-        }
-        else if (_fishingBars.HasFishEscaped)
-        {
-            // defeat
-            _fishingBars.CanRun = false;
-            Debug.Log("You Lose");  
-            _isRunning = false;    
-            _fishingUI.SetActive(false);
-           ShowDefeatEndGameMenu();
-        }
-    }
-
-    private void ShowVictoryEndGameMenu()
+    protected void ShowVictoryEndGameMenu()
     {
         _newGamePanel.SetActive(true);
         _victoryText.SetActive(true); 
     }
     
-    private void ShowDefeatEndGameMenu()
+    protected void ShowDefeatEndGameMenu()
     {
         _newGamePanel.SetActive(true);  
         _defeatText.SetActive(true);    

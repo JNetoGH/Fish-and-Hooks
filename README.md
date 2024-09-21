@@ -1,9 +1,13 @@
 # Fish and Hooks
 This wifi-rod branch is the one reliable to get the wi-fi rod controller support, as we plan to develop the game anf redlease it in game stores, the support to this alternative controller may be set aside on the other branches, in this branch you can always seek to a compatible version.
 
-You can also ger a working build with support to the wi-fi rod controller on this release:
+You can get a working build with support to the wi-fi rod controller on this release:
 
 https://github.com/JNetoGH/Fish-and-Hooks/releases/tag/v0.1.7
+
+And a working version of the required Arduino's firmware in this repo:
+
+https://github.com/JNetoGH/Arduino-Fishing-Controller
 
 
 ## Group Members

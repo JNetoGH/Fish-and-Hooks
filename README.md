@@ -5,7 +5,7 @@ You can get a working build with support to the wi-fi rod controller on this rel
 
 https://github.com/JNetoGH/Fish-and-Hooks/releases/tag/v0.1.7
 
-And a working version of the required Arduino's firmware in this repo:
+And a working version of the required ESP32 Arduino's firmware in this repo:
 
 https://github.com/JNetoGH/Arduino-Fishing-Controller
 

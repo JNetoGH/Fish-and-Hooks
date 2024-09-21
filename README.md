@@ -1,4 +1,19 @@
-**How to Set the Wi-fi Rod Up**
+# Fish and Hooks
+This wifi-rod branch is the one reliable to get the wi-fi rod controller support, as we plan to develop the game anf redlease it in game stores, the support to this alternative controller may be set aside on the other branches, in this branch you can always seek to a compatible version.
+
+You can also ger a working build with support to the wi-fi rod controller on this release:
+
+https://github.com/JNetoGH/Fish-and-Hooks/releases/tag/v0.1.7
+
+
+## Group Members
+
+- João Neto 22200558
+- Joâo Silva 22004451
+- Henrique Monteiro 22202855
+
+
+## How to Set the Wi-fi Rod Up
 
 - Turn the Arduino on.
 - Connect to the "JNeto Arduino" wi-fi network, the pass is "jnetolindo".

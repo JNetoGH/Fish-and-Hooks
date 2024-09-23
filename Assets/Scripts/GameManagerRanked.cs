@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerRanked : GameManager
 {
+    
+    [SerializeField] private TextMeshProUGUI _recordText;
+    
     private void Start()
     {
     }
@@ -17,7 +21,13 @@ public class GameManagerRanked : GameManager
             return;
         
         _timer += Time.deltaTime;
-        _countdownText.text = ((int)_timer).ToString("00");
+
+        // Calculate seconds and milliseconds
+        int seconds = (int)_timer;
+        int milliseconds = (int)((_timer - seconds) * 1000);
+
+        // Format the timer as seconds:milliseconds
+        _timerText.text = string.Format("{0}:{1:000}", seconds, milliseconds);
    
         if (_fishingBars.HasFishEscaped)
         {
@@ -26,9 +36,13 @@ public class GameManagerRanked : GameManager
             Debug.Log("You Lose");  
             _isRunning = false;    
             _fishingUI.SetActive(false);
-            _fishingUI.SetActive(false);
-            ShowDefeatEndGameMenu();
+            _recordText.text = string.Format("{0}:{1:000}", seconds, milliseconds);
+            
+            _newGamePanel.SetActive(true);  
+            _recordText.gameObject.SetActive(true);
         }
+        
+        
     }
     
     

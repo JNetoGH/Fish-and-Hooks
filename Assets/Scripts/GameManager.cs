@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] protected GameObject _victoryText;
     [SerializeField] protected GameObject _defeatText;
     [SerializeField] protected FishingBars _fishingBars; 
-    [SerializeField] protected TextMeshProUGUI _countdownText; 
+    [SerializeField] protected TextMeshProUGUI _timerText; 
     [SerializeField] protected FishCatchingController _fishCatchingController;
     
     private void Start()
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
             return;
         
         _timer -= Time.deltaTime;
-        _countdownText.text = ((int)_timer).ToString("00");
+        _timerText.text = ((int)_timer).ToString("00");
         
         if (_timer <= 0)
         {

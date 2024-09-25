@@ -1896,6 +1896,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1568203252752159489, guid: a3f433ffb830541ec9a3085b5a48dbce, type: 3}
+      propertyPath: m_Name
+      value: Async Authentication
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963463189112409200, guid: a3f433ffb830541ec9a3085b5a48dbce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963463189112409200, guid: a3f433ffb830541ec9a3085b5a48dbce, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963463189112409200, guid: a3f433ffb830541ec9a3085b5a48dbce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963463189112409200, guid: a3f433ffb830541ec9a3085b5a48dbce, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.474048
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963463189112409200, guid: a3f433ffb830541ec9a3085b5a48dbce, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.034325384
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963463189112409200, guid: a3f433ffb830541ec9a3085b5a48dbce, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.87753004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963463189112409200, guid: a3f433ffb830541ec9a3085b5a48dbce, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.063571915
+      objectReference: {fileID: 0}
     - target: {fileID: 6015739996361601549, guid: a3f433ffb830541ec9a3085b5a48dbce, type: 3}
       propertyPath: m_Name
       value: Fishing Game Hell Ranked Variant of the Variant

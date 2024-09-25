@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class JNetoArduinoHttpClient : MonoBehaviour
+public class ArduinoHttpClient : MonoBehaviour
 {
     
     /// <summary>

@@ -6231,50 +6231,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!1 &5447444763016632049
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4256867132380265182}
-  - component: {fileID: 3971630409908661704}
-  m_Layer: 0
-  m_Name: Async Authentication Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4256867132380265182
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5447444763016632049}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6907758102514002859}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3971630409908661704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5447444763016632049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cfd17f477e3b44e4a7436c646ada5c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5498232457882816857
 GameObject:
   m_ObjectHideFlags: 0
@@ -7464,6 +7420,56 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!1 &6475236917967984801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3948634060912022280}
+  - component: {fileID: 5225914754408778598}
+  m_Layer: 0
+  m_Name: Arduino Http Client
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3948634060912022280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475236917967984801}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.1299973, y: 0, z: 0.87000275}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6907758102514002859}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5225914754408778598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475236917967984801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7801e1c2a1ca9dd4db497c5e40c8fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EncoderValue>k__BackingField: 0
+  _isConnected: 0
+  _encoderValueUrl: http://192.168.4.1/value
+  _updateInterval: 0
+  _ledOnUrl: http://192.168.4.1/H
+  _ledOffUrl: http://192.168.4.1/L
 --- !u!1 &6517402543074118889
 GameObject:
   m_ObjectHideFlags: 0
@@ -7676,7 +7682,7 @@ GameObject:
   - component: {fileID: 2197779550460697157}
   - component: {fileID: 1174089361698183308}
   m_Layer: 0
-  m_Name: SFX Manager
+  m_Name: SFX Audio Sources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8471,56 +8477,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &7390008960248358479
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 717717689966081210}
-  - component: {fileID: 2684821367149891830}
-  m_Layer: 0
-  m_Name: JNeto's Arduino Http Client
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &717717689966081210
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7390008960248358479}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1299973, y: 0, z: 0.87000275}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6907758102514002859}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2684821367149891830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7390008960248358479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7801e1c2a1ca9dd4db497c5e40c8fb5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <EncoderValue>k__BackingField: 0
-  _isConnected: 0
-  _encoderValueUrl: http://192.168.4.1/value
-  _updateInterval: 0
-  _ledOnUrl: http://192.168.4.1/H
-  _ledOffUrl: http://192.168.4.1/L
 --- !u!1 &7449575546943680817
 GameObject:
   m_ObjectHideFlags: 0
@@ -9379,9 +9335,8 @@ Transform:
   m_Children:
   - {fileID: 2197779550460697157}
   - {fileID: 6051076894934315296}
-  - {fileID: 4256867132380265182}
+  - {fileID: 3948634060912022280}
   - {fileID: 155266907056340037}
-  - {fileID: 717717689966081210}
   - {fileID: 723249427894818652}
   - {fileID: 3269854261692117210}
   - {fileID: 7496855659892575754}

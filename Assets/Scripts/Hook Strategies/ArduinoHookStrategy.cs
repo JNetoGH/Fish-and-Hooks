@@ -16,11 +16,11 @@ public class ArduinoHookStrategy : MonoBehaviour, IHookStrategy
     [ReadOnly, SerializeField] private float _hookPosition;
     [ReadOnly, SerializeField] private float _hookYVelocity;
     [ReadOnly, SerializeField] private int _lastEncoderValue = 0;
-    private JNetoArduinoHttpClient _jNetoArduinoHttpClient;
+    private ArduinoHttpClient _arduinoHttpClient;
 
     private void Start()
     {
-        _jNetoArduinoHttpClient = FindAnyObjectByType<JNetoArduinoHttpClient>();
+        _arduinoHttpClient = FindAnyObjectByType<ArduinoHttpClient>();
     }
 
     private void FixedUpdate()
@@ -28,10 +28,10 @@ public class ArduinoHookStrategy : MonoBehaviour, IHookStrategy
         if (!CanRun)
             return;
 
-        if (!_jNetoArduinoHttpClient.IsConnected)
+        if (!_arduinoHttpClient.IsConnected)
             return;
 
-        float newEncoderValue = _jNetoArduinoHttpClient.EncoderValue;
+        float newEncoderValue = _arduinoHttpClient.EncoderValue;
 
         float hookUpDownForce = HookUpDownForcePerSecond * Time.fixedDeltaTime;
         float hookDrag = HookDragPerSecond * Time.fixedDeltaTime;
@@ -72,7 +72,7 @@ public class ArduinoHookStrategy : MonoBehaviour, IHookStrategy
         Hook.position = Vector3.Lerp(BottomPivot.position + offset, TopPivot.position, _hookPosition);
 
         // Atualiza o valor do encoder.
-        _lastEncoderValue = _jNetoArduinoHttpClient.EncoderValue;
+        _lastEncoderValue = _arduinoHttpClient.EncoderValue;
     }
 
     public void ResetHook()

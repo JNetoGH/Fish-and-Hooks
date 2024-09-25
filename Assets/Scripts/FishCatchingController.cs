@@ -53,7 +53,7 @@ public class FishCatchingController : MonoBehaviour
     public void ResetFish()
     {
         StopStringJoint();
-        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.linearVelocity = Vector3.zero;
         _rigidbody.angularVelocity = Vector3.zero;
         _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         transform.position = _initialPosition;

@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         
         // Instantiates a new MusicManager in case there is None in the scene.
         // The MusicPlayer script also checks if it is the only instance in the scene.
-        if (FindObjectOfType<MusicPlayer>() is null)
+        if (FindAnyObjectByType<MusicPlayer>() is null)
             Instantiate(_musicManagerPrefab);
     }
     

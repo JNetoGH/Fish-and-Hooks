@@ -52,7 +52,7 @@ public class JNetoArduinoHttpClient : MonoBehaviour
     
     private void Start()
     {
-        _fishingBars = FindObjectOfType<FishingBars>();
+        _fishingBars = FindAnyObjectByType<FishingBars>();
         StartCoroutine(ReadEncoderValue());
     }
 

@@ -29,7 +29,7 @@ public class MusicPlayer : MonoBehaviour
     void Awake()
     {
         // Checking if there is only 1 instance.
-        MusicPlayer otherInScene = FindObjectOfType<MusicPlayer>();
+        MusicPlayer otherInScene = FindAnyObjectByType<MusicPlayer>();
         if (otherInScene is not null && otherInScene != this)
             Destroy(this.gameObject);
         

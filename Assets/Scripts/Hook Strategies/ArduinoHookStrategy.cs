@@ -20,7 +20,7 @@ public class ArduinoHookStrategy : MonoBehaviour, IHookStrategy
 
     private void Start()
     {
-        _jNetoArduinoHttpClient = FindObjectOfType<JNetoArduinoHttpClient>();
+        _jNetoArduinoHttpClient = FindAnyObjectByType<JNetoArduinoHttpClient>();
     }
 
     private void FixedUpdate()

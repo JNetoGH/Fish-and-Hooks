@@ -1,0 +1,1 @@
+/Users/jneto/Desktop/Unity Projects/Fishing-Game/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/254x4m5x/obj/armeabi-v7a

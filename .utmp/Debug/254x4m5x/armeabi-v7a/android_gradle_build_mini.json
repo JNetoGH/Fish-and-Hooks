@@ -1,0 +1,28 @@
+{
+  "buildFiles": [
+    "/Users/jneto/Desktop/Unity Projects/Fishing-Game/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/CMakeLists.txt",
+    "/Users/jneto/Desktop/Unity Projects/Fishing-Game/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/FramePacing/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Applications/Unity/Hub/Editor/6000.0.20f1/PlaybackEngines/AndroidPlayer/SDK/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/jneto/Desktop/Unity Projects/Fishing-Game/.utmp/Debug/254x4m5x/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Applications/Unity/Hub/Editor/6000.0.20f1/PlaybackEngines/AndroidPlayer/SDK/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/jneto/Desktop/Unity Projects/Fishing-Game/.utmp/Debug/254x4m5x/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "swappywrapper::@7e25bd1f32ce224db4e9": {
+      "artifactName": "swappywrapper",
+      "abi": "armeabi-v7a",
+      "output": "/Users/jneto/Desktop/Unity Projects/Fishing-Game/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/254x4m5x/obj/armeabi-v7a/libswappywrapper.so",
+      "runtimeFiles": []
+    }
+  }
+}

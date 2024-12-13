@@ -1,25 +1,17 @@
-using System;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 
 
 public class GameManager : MonoBehaviour
 {
-    
-    protected enum Difficulty
-    {
-        Easy,
-        Mid,
-        Hard,
-        Inferno
-    }
+
+    [Title("Dependence Injection")]
+    [Required] public FishingSet currentSet;
     
     [Title("Gameplay")]   
-    [SerializeField] protected Difficulty _difficulty = Difficulty.Easy;
     [SerializeField] private float _countdownDuration = 15.5f;
     [SerializeField] protected float _displayEndGameMenuAfter = 3f;
     
@@ -83,63 +75,27 @@ public class GameManager : MonoBehaviour
         // The current scene shouldn't be loaded.
         if (SceneManager.GetActiveScene().buildIndex == sceneIndex) 
             return;
+        
         SceneManager.LoadScene(sceneIndex);
     }
-
-    public void RunNewGameForSetDifficulty()
-    {
-        switch (_difficulty)
-        {
-            case Difficulty.Easy: RunNewGameEasy(); break;
-            case Difficulty.Mid: RunNewGameMid(); break;
-            case Difficulty.Hard: RunNewGameHard(); break;
-            case Difficulty.Inferno: RunNewGameInferno(); break;
-        }
-    }
     
-    [Button]                                                    
-    private void RunNewGameEasy()                                 
-    {                                                           
-        _fishingBars._fishTimerMultiplier = 1.5f;               
-        _fishingBars._escapeBarIncrement = 0.2f;                
-        _fishingBars._fishSmoothMotion = 0.7f;  
-        _fishingBars._hookEscapeDecrement = 0.15f;     
-        RunNewGame();                                           
-    }                                                           
-    
-    [Button]                               
-    private void RunNewGameMid()
-    {
-        _fishingBars._fishTimerMultiplier = 1.3f;
-        _fishingBars._escapeBarIncrement = 0.25f; 
-        _fishingBars._fishSmoothMotion = 0.6f; 
-        _fishingBars._hookEscapeDecrement = 0.125f;    
-        RunNewGame();
-    }                                      
-    
-    [Button]                                              
-    private void RunNewGameHard()                           
-    {                                                     
-        _fishingBars._fishTimerMultiplier = 1f;
-        _fishingBars._escapeBarIncrement = 0.3f;
-        _fishingBars._fishSmoothMotion = 0.5f;
-        _fishingBars._hookEscapeDecrement = 0.1f;
-        RunNewGame();                                     
-    }                                                     
-                                                                       
-    [Button]                                                       
-    private void RunNewGameInferno()                                   
-    {                                                              
-        _fishingBars._fishTimerMultiplier = 0.8f;                    
-        _fishingBars._escapeBarIncrement = 0.4f;                   
-        _fishingBars._fishSmoothMotion = 0.3f;                     
-        _fishingBars._hookEscapeDecrement = 0.07f;                  
-        RunNewGame();                                              
-    }                                                              
-    
+    [Button]
     private void RunNewGame()
     {
+        if (currentSet == null)
+        {
+            Debug.LogWarning("Fishing Set is null, the stage will not load");
+            return;
+        }
+        
+        // Setting the stage dependencies
+        _fishingBars._hookEscapeDecrement = currentSet.hookEscapeDecrement;    
+        _fishingBars._escapeBarIncrement = currentSet.escapeBarIncrement; 
+        _fishingBars._fishTimerMultiplier = currentSet.fishTimerMultiplier;
+        _fishingBars._fishSmoothMotion = currentSet.fishSmoothMotion; 
+        
         _fishCatchingController.ResetFish();
+        
         _fishingUI.SetActive(true);
         _newGamePanel.SetActive(false);
         _welcomeText.SetActive(false);

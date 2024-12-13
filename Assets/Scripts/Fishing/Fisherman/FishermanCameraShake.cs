@@ -2,13 +2,12 @@ using System;
 using UnityEngine;
 using Cinemachine;
 using Sirenix.OdinInspector;
-using UnityEngine.Serialization;
 
 
 /// <summary>
 /// Controls the amount of shaking, scaling with the escape bar's fill.
 /// </summary>
-public class CameraShakeController : MonoBehaviour
+public class FishermanCameraShake : MonoBehaviour
 {
     
     [Title("Parameters")]  

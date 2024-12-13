@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class LineController : MonoBehaviour
 {
@@ -15,4 +14,5 @@ public class LineController : MonoBehaviour
         _lineRenderer.SetPosition(0, _point1.position);
         _lineRenderer.SetPosition(1, _point2.position);
     }
+    
 }

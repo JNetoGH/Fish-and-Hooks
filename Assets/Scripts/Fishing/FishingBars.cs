@@ -1,4 +1,3 @@
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,12 +55,12 @@ public class FishingBars : MonoBehaviour
 
 
     [Title("Escape Bar")]  
-    // How per second the escape bar fills up, this bar uses it y scale to fill, 0 is empty and 1 is full.
+    // Rate the escape bar fills up per second, this bar uses its scale to fill, 0 is empty and 1 is full.
     [SerializeField] public float _escapeBarIncrement = 0.3f;
 
 
     [Title("Hook")] 
-    // How much per second the hook decrements from the escape bar
+    // Rate per second the hook decrements from the escape bar.
     [SerializeField] public float _hookEscapeDecrement = 0.1f; 
     // The color for when the fish is out of the hook.
     [SerializeField] private Color _fishOutColor = Color.yellow; 

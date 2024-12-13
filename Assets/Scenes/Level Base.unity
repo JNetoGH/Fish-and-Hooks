@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 2785087dd419547409e48f18c4ff56f2, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1ba93cdffea6a48fd8bbfa99f1c71c9f, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 41374590ab367460abfa4ef884f7d898, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -6762,10 +6762,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6460789252271102929}
-  - {fileID: 889666922}
   - {fileID: 1499979203694964916}
   - {fileID: 4976160029668507089}
+  - {fileID: 889666922}
   - {fileID: 3396681431132540830}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11360,7 +11359,7 @@ GameObject:
   - component: {fileID: 9120452507087131263}
   - component: {fileID: 1398558407926163000}
   m_Layer: 0
-  m_Name: Fishing Bars Logic
+  m_Name: Fishing Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12630,14 +12629,14 @@ Transform:
   m_GameObject: {fileID: 1975447230462819318}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1299973, y: 0, z: 0.87000275}
+  m_LocalPosition: {x: 93.6, y: 4.89, z: -116.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1436146171426280494}
   - {fileID: 6917182239100442150}
   - {fileID: 7992851475611458741}
-  m_Father: {fileID: 1798071112663853631}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6468932612701492812
 MonoBehaviour:
@@ -13619,7 +13618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e56a5d53fc4144908806bb4fcddb351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSet: {fileID: 0}
+  currentSet: {fileID: 11400000, guid: d7a0755e6f69b4a2c99df63f4a644080, type: 2}
   _countdownDuration: 15.5
   _displayEndGameMenuAfter: 4
   _timer: 0
@@ -16554,6 +16553,7 @@ SceneRoots:
   - {fileID: 571061849}
   - {fileID: 613680722}
   - {fileID: 762715404}
+  - {fileID: 6460789252271102929}
   - {fileID: 1798071112663853631}
   - {fileID: 1925066295282632760}
   - {fileID: 8252647248301627684}

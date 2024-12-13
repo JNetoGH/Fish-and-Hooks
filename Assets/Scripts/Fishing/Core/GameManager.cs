@@ -1,7 +1,6 @@
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 
 
@@ -70,15 +69,6 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void LoadLevel(int sceneIndex)
-    {
-        // The current scene shouldn't be loaded.
-        if (SceneManager.GetActiveScene().buildIndex == sceneIndex) 
-            return;
-        
-        SceneManager.LoadScene(sceneIndex);
-    }
-    
     [Button]
     private void RunNewGame()
     {
@@ -88,21 +78,29 @@ public class GameManager : MonoBehaviour
             return;
         }
         
-        // Setting the stage dependencies
+        // Setting the stage dependencies.
         _fishingBars._hookEscapeDecrement = currentSet.hookEscapeDecrement;    
         _fishingBars._escapeBarIncrement = currentSet.escapeBarIncrement; 
         _fishingBars._fishTimerMultiplier = currentSet.fishTimerMultiplier;
         _fishingBars._fishSmoothMotion = currentSet.fishSmoothMotion; 
         
-        _fishCatchingController.ResetFish();
-        
-        _fishingUI.SetActive(true);
+        // Hide the rest of the UIs
         _newGamePanel.SetActive(false);
         _welcomeText.SetActive(false);
         _victoryText.SetActive(false);   
         _defeatText.SetActive(false);   
+        
+        // Set the timer and flag to a new run.
         _timer = _countdownDuration;
         _isRunning = true;
+        
+        // Reset the fish model to its initial state.
+        _fishCatchingController.ResetFish();
+        
+        // Show the fishing bars.
+        _fishingUI.SetActive(true);
+        
+        // Start the fishing bars logic
         _fishingBars.ResetTheBars();
         _fishingBars.CanRun = true;
     }
